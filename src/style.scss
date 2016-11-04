@@ -1,27 +1,4 @@
 
-#lugui-menu {
-  /*padding-left: 5px;*/
-  /*padding-right: 5px;*/
-
-  /*border: 2px solid darkgrey;*/
-  /*background-color: black;*/
-  border-radius: 5px;
-
-  font-weight: normal;
-  font-size: 11pt;
-  white-space: nowrap;
-  padding: 5px;
-}
-
-#lugui-menu a {
-  font-size: 10pt;
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: none;
-  color: royalblue;
-
-}
-
 div#pool {
   position: fixed;
   z-index: 40;
@@ -31,33 +8,6 @@ div#pool {
   background: #e9e9e9;
   border-radius: 5px;
   padding: 3px;
-}
-
-#lugui-menu a:hover {
-  /*font-size: 11pt;*/
-  font-weight: bold;
-}
-
-#lugui-menu-actions span, #lugui-menu-actions form span {
-  font-size: 10pt;
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: none;
-  color: royalblue;
-  background-color: white;
-  border-radius: 4px;
-  padding: 1px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-#lugui-menu-actions span:hover {
-  background-color: darkgrey;
-}
-
-#lugui-menu {
 }
 
 html, body {
