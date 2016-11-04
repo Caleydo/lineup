@@ -56,7 +56,8 @@ const lineUpDemoConfig = {
 };
 
 function initLineup(name: string, desc: any, _data: any[], lineup) {
-  document.querySelector('[data-header="appLink"]').innerHTML = name;
+  document.querySelector('[data-header="appLink"]').innerHTML = 'LineUp - '+name;
+  document.title = 'LineUp - ' + name;
   fixMissing(desc.columns, _data);
   const provider = new LocalDataProvider(_data, deriveColors(desc.columns));
   lineUpDemoConfig.name = name;
@@ -99,15 +100,77 @@ function loadGist(gistid) {
   });
 }
 
+function dumpLayout(lineup) {
+  //full spec
+  var s = lineup.dump();
+  s.columns = (<any>lineup.data).columns;
+  s.data = (<any>lineup.data).data;
+
+  //stringify with pretty print
+  return JSON.stringify(s, null, '\t');
+}
+
+function saveToGist(lineup) {
+  //stringify with pretty print
+  const str = dumpLayout(lineup);
+  const args = {
+    'description': lineUpDemoConfig.name,
+    'public': true,
+    'files': {
+      'lineup.json': {
+        'content': str
+      }
+    }
+  };
+  d3.json('https://api.github.com/gists').post(JSON.stringify(args), (error, data) => {
+    if (error) {
+      console.log('cant store to gist', error);
+    } else {
+      var id = data.id;
+      document.title = 'LineUp - ' + (args.description || 'Custom');
+      history.pushState({id: 'gist:' + id}, 'LineUp - ' + (args.description || 'Custom'), '#gist:' + id);
+    }
+  });
+}
+
+function saveAs(blob: Blob, name: string) {
+  const downloadLink = document.createElement('a');
+  downloadLink.href = URL.createObjectURL(blob);
+  (<any>downloadLink).download = name + '.csv';
+
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}
+
+function exportToCSV(lineup) {
+  const first = lineup.data.getRankings()[0];
+  lineup.data.exportTable(first).then(function(str) {
+    //create blob and save it
+    var blob = new Blob([str], {type: 'text/csv;charset=utf-8'});
+    saveAs(blob, 'LineUp-' + lineUpDemoConfig.name + '.csv');
+  });
+}
 
 {
   const header = createHeader(
     <HTMLElement>document.querySelector('#caleydoHeader'),
     {appLink: new AppHeaderLink('LineUp Demos')}
   );
+  var lineup: LineUp = null;
+
+  header.addRightMenu(`<i class="fa fa-download"></i>`, () => {
+    if (lineup) {
+      exportToCSV(lineup);
+    }
+  });
+  header.addRightMenu(`<i class="fa fa-github"></i>`, () => {
+    if (lineup) {
+      saveToGist(lineup);
+    }
+  });
   header.rightMenu.insertBefore(document.getElementById('datasetSelector'), header.rightMenu.firstChild);
 
-  var lineup: LineUp = null;
   const parent = <HTMLDivElement>document.querySelector('#app');
 
   const loadDataset = (dataset: IDataSetSpec) => {
