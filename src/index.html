@@ -15,13 +15,16 @@
 <div id="app">
   <h3 style="margin: 5px;">Loading &hellip;</h3>
   <div id="lugui-wrapper"></div>
-  <div id="pool">
-    <div style="text-align: right">New Column <i class="fa fa-close"></i></div>
-  </div>
   <div class="busy"></div>
 </div>
 
 <div style="display: none">
+  <li class="dropdown" id="poolSelector">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Show Column <span class="caret"></span></a>
+    <div class="dropdown-menu" id="pool">
+
+    </div>
+  </li>
   <li class="dropdown" id="datasetSelector">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Datasets <span class="caret"></span></a>
     <ul class="dropdown-menu">

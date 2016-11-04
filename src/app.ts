@@ -5,6 +5,7 @@
 import {create as createHeader, AppHeaderLink} from 'phovea_bootstrap_fontawesome/src/header';
 import LineUp from 'lineupjs/src/lineup';
 import {LocalDataProvider} from 'lineupjs/src/provider';
+import {createStackDesc, createNestedDesc, createScriptDesc} from 'lineupjs/src/model';
 import {deriveColors} from 'lineupjs/src';
 import * as d3 from 'd3';
 import datasets, {IDataSetSpec} from './datasets';
@@ -66,9 +67,18 @@ function initLineup(name: string, desc: any, _data: any[], lineup) {
   } else {
     lineup = new LineUp(document.getElementById('lugui-wrapper'), provider, lineUpDemoConfig);
     lineup.addPool(document.getElementById('pool'), {
-      hideUsed: false
+      hideUsed: false,
+      elemWidth: 120,
+      elemHeight: 30,
+      layout: 'grid',
+      width: 360,
+      addAtEndOnClick: true,
+      additionalDesc: [
+        createStackDesc(),
+        createNestedDesc(),
+        createScriptDesc()
+      ]
     }).update();
-    lineup.restore(desc);//TODO: why?
   }
   provider.deriveDefault();
   lineup.update();
@@ -169,8 +179,10 @@ function exportToCSV(lineup) {
       saveToGist(lineup);
     }
   });
+  header.mainMenu.appendChild(document.getElementById('poolSelector'));
   header.rightMenu.insertBefore(document.getElementById('datasetSelector'), header.rightMenu.firstChild);
 
+  //lineup.data.push(lineup.data.getLastRanking(), LineUpJS.model.StackColumn.desc('Stack Column'));
   const parent = <HTMLDivElement>document.querySelector('#app');
 
   const loadDataset = (dataset: IDataSetSpec) => {
