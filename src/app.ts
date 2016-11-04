@@ -10,6 +10,7 @@ import {deriveColors} from 'lineupjs/src';
 import * as d3 from 'd3';
 import datasets, {IDataSetSpec} from './datasets';
 import {load as loadGist, save as saveToGist} from './gist';
+import exportToCSV from './export';
 
 function setBusy(busy = true) {
   const d = <HTMLDivElement>document.querySelector('#app > div.busy');
@@ -91,26 +92,6 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
     })
   });
   return lineup;
-}
-
-
-function saveAs(blob: Blob, name: string) {
-  const downloadLink = document.createElement('a');
-  downloadLink.href = URL.createObjectURL(blob);
-  (<any>downloadLink).download = name + '.csv';
-
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-}
-
-function exportToCSV(lineup: LineUp, name: string) {
-  const first = lineup.data.getRankings()[0];
-  lineup.data.exportTable(first).then(function(str) {
-    //create blob and save it
-    var blob = new Blob([str], {type: 'text/csv;charset=utf-8'});
-    saveAs(blob, 'LineUp-' + name + '.csv');
-  });
 }
 
 {
