@@ -64,7 +64,9 @@
   "dependencies": {
     "phovea_core": "github:phovea/phovea_core",
     "phovea_bootstrap_fontawesome": "github:phovea/phovea_bootstrap_fontawesome",
-    "lineupjs": "github:Caleydo/lineup.js#feature_146_react"
+    "lineupjs": "github:Caleydo/lineup.js#feature_146_react",
+    "@types/d3": "^3.5.36",
+    "d3": "^3.5.17"
   },
   "name": "lineup_demos",
   "description": "",

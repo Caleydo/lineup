@@ -6,7 +6,8 @@
       "app": "./src/index.ts"
     },
     "libraries": [
-      "lineupjs"
+      "lineupjs",
+      "d3"
     ],
     "modules": [
       "phovea_core",
@@ -14,6 +15,7 @@
     ],
     "libraryAliases": {
       "lineupjs": "lineupjs",
+      "d3": "d3/d3",
       "jquery": "jquery",
       "font-awesome": "font-awesome"
     },
