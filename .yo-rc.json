@@ -1,7 +1,7 @@
 {
   "generator-phovea": {
     "type": "app",
-    "app": "LineUp Demos",
+    "app": "lineup_demos",
     "entries": {
       "app": "./src/index.ts"
     },
