@@ -1,0 +1,27 @@
+{
+  "generator-phovea": {
+    "type": "app",
+    "app": "LineUp Demos",
+    "entries": {
+      "app": "./src/index.ts"
+    },
+    "libraries": [
+      "lineupjs"
+    ],
+    "modules": [
+      "phovea_core",
+      "phovea_bootstrap_fontawesome"
+    ],
+    "libraryAliases": {
+      "lineupjs": "lineupjs",
+      "jquery": "jquery",
+      "font-awesome": "font-awesome"
+    },
+    "ignores": [],
+    "extensions": [],
+    "name": "lineup_demos",
+    "author": "Samuel Gratzl",
+    "today": "Fri, 04 Nov 2016 09:47:30 GMT",
+    "githubAccount": "sgratzl"
+  }
+}
