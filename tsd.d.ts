@@ -25,3 +25,9 @@ declare module "raw!*";
 declare module "url!*";
 //allow html dependencies
 declare module "import!*";
+
+interface ISystem {
+  import(module: string): Promise<any>;
+}
+
+declare const System: ISystem;

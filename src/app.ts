@@ -1,54 +1,32 @@
 /**
- * Created by Caleydo Team on 31.08.2016.
+ * Created by sam on 04.11.2016.
  */
 
-import * as d3 from 'd3';
-import {HELLO_WORLD} from './language';
+import {create as createHeader, AppHeaderLink} from 'phovea_bootstrap_fontawesome/src/header';
+import LineUp from 'lineupjs/src/lineup';
+import {LocalDataProvider} from 'lineupjs/src/provider';
 
-/**
- * The main class for the App app
- */
-export class App {
 
-  private $node;
-
-  constructor(parent:Element) {
-    this.$node = d3.select(parent);
-  }
-
-  /**
-   * Initialize the view and return a promise
-   * that is resolved as soon the view is completely initialized.
-   * @returns {Promise<App>}
-   */
-  init() {
-    return this.build();
-  }
-
-  /**
-   * Load and initialize all necessary views
-   * @returns {Promise<App>}
-   */
-  private build() {
-    this.$node.html(HELLO_WORLD);
-    return Promise.resolve(null);
-  }
-
-  /**
-   * Show or hide the application loading indicator
-   * @param isBusy
-   */
-  setBusy(isBusy) {
-    this.$node.select('.busy').classed('hidden', !isBusy);
-  }
-
+function setBusy(busy = true) {
+  const d = <HTMLDivElement>document.querySelector('#app > div.busy');
+  d.className = 'busy '+(busy ? '': 'hidden');
 }
 
-/**
- * Factory method to create a new app instance
- * @param parent
- * @returns {App}
- */
-export function create(parent:Element) {
-  return new App(parent);
+createHeader(
+  <HTMLElement>document.querySelector('#caleydoHeader'),
+  { appLink: new AppHeaderLink('LineUp Demos') }
+);
+
+const parent = <HTMLDivElement>document.querySelector('#app');
+
+interface IDataSet {
+  name: string;
+  url: string;
+  dump: any;
 }
+
+const sp500 = System.import('./datasets/sp500/index');
+
+sp500.then((module: IDataSet) => {
+  console.log(module);
+})
