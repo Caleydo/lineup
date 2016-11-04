@@ -11,6 +11,7 @@ import * as d3 from 'd3';
 import datasets, {IDataSetSpec} from './datasets';
 import {load as loadGist, save as saveToGist} from './gist';
 import exportToCSV from './export';
+import importTable from './importer';
 
 function setBusy(busy = true) {
   const d = <HTMLDivElement>document.querySelector('#app > div.busy');
@@ -115,6 +116,14 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   });
   header.mainMenu.appendChild(document.getElementById('poolSelector'));
   header.rightMenu.insertBefore(document.getElementById('datasetSelector'), header.rightMenu.firstChild);
+  header.addRightMenu(`<i class="fa fa-upload"></i>`, () => {
+    importTable().then(({name, desc, data}) => {
+      lineup = initLineup(name, desc, data, lineup);
+      setBusy(false);
+    }).catch(() => {
+      // aborted ok
+    });
+  });
 
   const loadDataset = (dataset: IDataSetSpec) => {
     const desc = dataset.desc;
