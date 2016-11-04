@@ -11,13 +11,15 @@
     ],
     "modules": [
       "phovea_core",
-      "phovea_bootstrap_fontawesome"
+      "phovea_bootstrap_fontawesome",
+      "phovea_importer"
     ],
     "libraryAliases": {
       "lineupjs": "lineupjs",
       "d3": "d3/d3",
       "jquery": "jquery",
-      "font-awesome": "font-awesome"
+      "font-awesome": "font-awesome",
+      "papaparse": "papaparse"
     },
     "ignores": [],
     "extensions": [],

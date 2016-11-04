@@ -66,7 +66,8 @@
     "phovea_bootstrap_fontawesome": "github:phovea/phovea_bootstrap_fontawesome",
     "lineupjs": "github:Caleydo/lineup.js#feature_146_react",
     "@types/d3": "^3.5.36",
-    "d3": "^3.5.17"
+    "d3": "^3.5.17",
+    "phovea_importer": "github:phovea/phovea_importer"
   },
   "name": "lineup_demos",
   "description": "",
