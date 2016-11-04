@@ -45,7 +45,7 @@ function fixMissing(columns, data) {
 }
 
 const lineUpDemoConfig = {
-  htmlLayout: {
+  header: {
     autoRotateLabels: true
   },
   renderingOptions: {
@@ -53,8 +53,9 @@ const lineUpDemoConfig = {
     histograms: true,
     animated: true
   },
-  svgLayout: {
-    freezeCols: 0
+  body: {
+    freezeCols: 0,
+    renderer: 'canvas'
   }
 };
 
