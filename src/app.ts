@@ -14,13 +14,6 @@ function setBusy(busy = true) {
   d.className = 'busy ' + (busy ? '' : 'hidden');
 }
 
-createHeader(
-  <HTMLElement>document.querySelector('#caleydoHeader'),
-  {appLink: new AppHeaderLink('LineUp Demos')}
-);
-
-const parent = <HTMLDivElement>document.querySelector('#app');
-
 interface IDataSet {
   name: string;
   url: string;
@@ -62,9 +55,8 @@ const lineUpDemoConfig = {
   }
 };
 
-var lineup: LineUp = null;
-
-function initLineup(name: string, desc: any, _data: any[]) {
+function initLineup(name: string, desc: any, _data: any[], lineup) {
+  document.querySelector('[data-header="appLink"]').innerHTML = name;
   fixMissing(desc.columns, _data);
   const provider = new LocalDataProvider(_data, deriveColors(desc.columns));
   lineUpDemoConfig.name = name;
@@ -88,26 +80,74 @@ function initLineup(name: string, desc: any, _data: any[]) {
         col.sortByMe();
     })
   });
-  setBusy(false);
+  return lineup;
 }
 
-const dataset = datasets[0];
-const desc = dataset.desc;
-const file = dataset.url;
-d3.dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
-  initLineup(dataset.name, desc, _data);
-});
-
 function loadGist(gistid) {
-  d3.json('https://api.github.com/gists/' + gistid, (error, gistdesc) => {
-    if (error) {
-      console.error('cant load gist id: ' + gistid, error);
-    } else if (gistdesc) {
-      const firstFile = gistdesc.files[Object.keys(gistdesc.files)[0]];
-      const content = JSON.parse(firstFile.content);
-      initLineup(gistdesc.description, content, content.data);
-    }
+  return new Promise((resolve, reject) => {
+    d3.json('https://api.github.com/gists/' + gistid, (error, gistdesc) => {
+      if (error) {
+        console.error('cant load gist id: ' + gistid, error);
+        reject('cant load');
+      } else if (gistdesc) {
+        const firstFile = gistdesc.files[Object.keys(gistdesc.files)[0]];
+        const content = JSON.parse(firstFile.content);
+        resolve({name: gistdesc.description, desc: content, data: content.data});
+      }
+      reject('not found');
+    });
   });
+}
+
+
+{
+  const header = createHeader(
+    <HTMLElement>document.querySelector('#caleydoHeader'),
+    {appLink: new AppHeaderLink('LineUp Demos')}
+  );
+  header.rightMenu.insertBefore(document.getElementById('datasetSelector'), header.rightMenu.firstChild);
+
+  var lineup: LineUp = null;
+  const parent = <HTMLDivElement>document.querySelector('#app');
+
+  const loadDataset = (dataset: IDataSetSpec) => {
+    const desc = dataset.desc;
+    const file = dataset.url;
+    setBusy(true);
+    d3.dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
+      lineup = initLineup(dataset.name, desc, _data, lineup);
+      setBusy(false);
+    });
+  };
+
+  {
+    let base = <HTMLElement>document.querySelector('#datasetSelector ul');
+    datasets.forEach((d) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="#${d.id}">${d.name}</a>`;
+      li.firstElementChild.addEventListener('click', (event) => {
+        loadDataset(d);
+      });
+      base.appendChild(li);
+    });
+  }
+  var old = history.state ? history.state.id : (window.location.hash ? window.location.hash.substr(1) : '');
+  if (old.match(/gist:.*/)) {
+    let id = old;
+    let name = 'Github Gist ' + old.substr(5);
+    let gist = old.substr(5);
+    loadGist(gist).then(({name, desc, data}) => {
+      lineup = initLineup(name, desc, data, lineup);
+      setBusy(false);
+    });
+  } else {
+    let choose = datasets.filter((d) => d.id === old);
+    if (choose.length > 0) {
+      loadDataset(choose[0]);
+    } else {
+      loadDataset(datasets[0]);
+    }
+  }
 }
 //
 //

@@ -20,20 +20,20 @@ const data: IDataSetSpec[] = [
   {
     id: 'prosperity',
     name: 'Legatum Prosperity Index',
-    desc: descSP500,
-    url: dataSP500
+    desc: descProsperity,
+    url: dataProsperity
   },
   {
     id: 'uni',
     name: 'University Rankings',
-    desc: descSP500,
-    url: dataSP500
+    desc: descWURSmall,
+    url: dataWUR
   },
   {
     id: 'uni_big',
     name: 'University Ranking bigger',
-    desc: descSP500,
-    url: dataSP500
+    desc: descWUR,
+    url: dataWUR
   },
   {
     id: 'sp500',
