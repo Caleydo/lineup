@@ -122,7 +122,7 @@ function generateWebpack(options) {
     entry: injectRegistry(options.entries),
     output: {
       path: resolve(__dirname, 'build'),
-      filename: (options.name || (pkg.name + (options.bundle ? '_bundle' : ''))) + (options.min ? '.min' : '') + '.js',
+      filename: (options.name || (pkg.name + (options.bundle ? '_bundle' : ''))) + ((options.min && options.suffix !== false) ? '.min' : '') + '.js',
       publicPath: '' //no public path = relative
     },
     resolve: {
@@ -272,10 +272,11 @@ function generateWebpackConfig(env) {
   } else { //isProduction
     return [
       //plain
-      generateWebpack(base),
+      // generateWebpack(base),
       //minified
       generateWebpack(simpleCopy(base, {
-        min: true
+        min: true,
+        suffix: false
       }))
     ];
   }
