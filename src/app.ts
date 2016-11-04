@@ -28,7 +28,7 @@ function fixMissing(columns, data) {
     if (col.type === 'number' && !col.domain) {
       var old = col.domain || [NaN, NaN];
       var minmax = d3.extent(data, (row) => {
-        return row[col.column].length === 0 ? undefined : +(row[col.column])
+        return row[col.column].length === 0 ? undefined : +(row[col.column]);
       });
       col.domain = [
         isNaN(old[0]) ? minmax[0] : old[0],
@@ -87,9 +87,10 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   var cols = provider.getRankings();
   cols.forEach((rankCol) => {
     rankCol.children.forEach((col) => {
-      if (col.desc.type === 'stack')
+      if (col.desc.type === 'stack') {
         col.sortByMe();
-    })
+      }
+    });
   });
   return lineup;
 }
@@ -115,9 +116,6 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   header.mainMenu.appendChild(document.getElementById('poolSelector'));
   header.rightMenu.insertBefore(document.getElementById('datasetSelector'), header.rightMenu.firstChild);
 
-  //lineup.data.push(lineup.data.getLastRanking(), LineUpJS.model.StackColumn.desc('Stack Column'));
-  const parent = <HTMLDivElement>document.querySelector('#app');
-
   const loadDataset = (dataset: IDataSetSpec) => {
     const desc = dataset.desc;
     const file = dataset.url;
@@ -142,11 +140,10 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   }
   var old = history.state ? history.state.id : (window.location.hash ? window.location.hash.substr(1) : '');
   if (old.match(/gist:.*/)) {
-    let id = old;
     let name = 'Github Gist ' + old.substr(5);
     let gist = old.substr(5);
+    currentName = name;
     loadGist(gist).then(({name, desc, data}) => {
-      currentName = name;
       lineup = initLineup(name, desc, data, lineup);
       setBusy(false);
     });
