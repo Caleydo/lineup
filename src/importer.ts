@@ -61,7 +61,7 @@ export default function importTable() {
       if ((<any>r.desc).idcolumn !== '_index') {
         columns.unshift({type: 'string', label: 'Row', column: (<any>r.desc).idcolumn});
       }
-      const name = 'Uploaded File';
+      const name = r.desc.name;
       const desc = { columns };
       //(r.desc, r.data, (<any>r.desc).idcolumn);
       submitted = true;
