@@ -9,6 +9,7 @@ import {createStackDesc, createNestedDesc, createScriptDesc} from 'lineupjs/src/
 import {deriveColors} from 'lineupjs/src';
 import * as d3 from 'd3';
 import datasets, {IDataSetSpec} from './datasets';
+import {load as loadGist, save as saveToGist} from './gist';
 
 function setBusy(busy = true) {
   const d = <HTMLDivElement>document.querySelector('#app > div.busy');
@@ -42,7 +43,6 @@ function fixMissing(columns, data) {
 }
 
 const lineUpDemoConfig = {
-  name: 'No Name',
   htmlLayout: {
     autoRotateLabels: true
   },
@@ -56,12 +56,11 @@ const lineUpDemoConfig = {
   }
 };
 
-function initLineup(name: string, desc: any, _data: any[], lineup) {
+function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   document.querySelector('[data-header="appLink"]').innerHTML = 'LineUp - '+name;
   document.title = 'LineUp - ' + name;
   fixMissing(desc.columns, _data);
   const provider = new LocalDataProvider(_data, deriveColors(desc.columns));
-  lineUpDemoConfig.name = name;
   if (lineup) {
     lineup.changeDataStorage(provider, desc);
   } else {
@@ -94,54 +93,6 @@ function initLineup(name: string, desc: any, _data: any[], lineup) {
   return lineup;
 }
 
-function loadGist(gistid) {
-  return new Promise((resolve, reject) => {
-    d3.json('https://api.github.com/gists/' + gistid, (error, gistdesc) => {
-      if (error) {
-        console.error('cant load gist id: ' + gistid, error);
-        reject('cant load');
-      } else if (gistdesc) {
-        const firstFile = gistdesc.files[Object.keys(gistdesc.files)[0]];
-        const content = JSON.parse(firstFile.content);
-        resolve({name: gistdesc.description, desc: content, data: content.data});
-      }
-      reject('not found');
-    });
-  });
-}
-
-function dumpLayout(lineup) {
-  //full spec
-  var s = lineup.dump();
-  s.columns = (<any>lineup.data).columns;
-  s.data = (<any>lineup.data).data;
-
-  //stringify with pretty print
-  return JSON.stringify(s, null, '\t');
-}
-
-function saveToGist(lineup) {
-  //stringify with pretty print
-  const str = dumpLayout(lineup);
-  const args = {
-    'description': lineUpDemoConfig.name,
-    'public': true,
-    'files': {
-      'lineup.json': {
-        'content': str
-      }
-    }
-  };
-  d3.json('https://api.github.com/gists').post(JSON.stringify(args), (error, data) => {
-    if (error) {
-      console.log('cant store to gist', error);
-    } else {
-      var id = data.id;
-      document.title = 'LineUp - ' + (args.description || 'Custom');
-      history.pushState({id: 'gist:' + id}, 'LineUp - ' + (args.description || 'Custom'), '#gist:' + id);
-    }
-  });
-}
 
 function saveAs(blob: Blob, name: string) {
   const downloadLink = document.createElement('a');
@@ -153,12 +104,12 @@ function saveAs(blob: Blob, name: string) {
   document.body.removeChild(downloadLink);
 }
 
-function exportToCSV(lineup) {
+function exportToCSV(lineup: LineUp, name: string) {
   const first = lineup.data.getRankings()[0];
   lineup.data.exportTable(first).then(function(str) {
     //create blob and save it
     var blob = new Blob([str], {type: 'text/csv;charset=utf-8'});
-    saveAs(blob, 'LineUp-' + lineUpDemoConfig.name + '.csv');
+    saveAs(blob, 'LineUp-' + name + '.csv');
   });
 }
 
@@ -167,16 +118,17 @@ function exportToCSV(lineup) {
     <HTMLElement>document.querySelector('#caleydoHeader'),
     {appLink: new AppHeaderLink('LineUp Demos')}
   );
+  var currentName = 'No Name';
   var lineup: LineUp = null;
 
   header.addRightMenu(`<i class="fa fa-download"></i>`, () => {
     if (lineup) {
-      exportToCSV(lineup);
+      exportToCSV(lineup, currentName);
     }
   });
   header.addRightMenu(`<i class="fa fa-github"></i>`, () => {
     if (lineup) {
-      saveToGist(lineup);
+      saveToGist(lineup, currentName);
     }
   });
   header.mainMenu.appendChild(document.getElementById('poolSelector'));
@@ -189,6 +141,7 @@ function exportToCSV(lineup) {
     const desc = dataset.desc;
     const file = dataset.url;
     setBusy(true);
+    currentName = dataset.name;
     d3.dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
       lineup = initLineup(dataset.name, desc, _data, lineup);
       setBusy(false);
@@ -212,6 +165,7 @@ function exportToCSV(lineup) {
     let name = 'Github Gist ' + old.substr(5);
     let gist = old.substr(5);
     loadGist(gist).then(({name, desc, data}) => {
+      currentName = name;
       lineup = initLineup(name, desc, data, lineup);
       setBusy(false);
     });
