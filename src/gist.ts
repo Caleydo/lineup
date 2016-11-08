@@ -9,12 +9,18 @@ export function load(gistid: string) {
   return new Promise((resolve, reject) => {
     json('https://api.github.com/gists/' + gistid, (error, gistdesc) => {
       if (error) {
-        console.error('cant load gist id: ' + gistid, error);
+        console.error('cannot load gist id: ' + gistid, error);
         reject('cant load');
       } else if (gistdesc) {
         const firstFile = gistdesc.files[Object.keys(gistdesc.files)[0]];
-        const content = JSON.parse(firstFile.content);
-        resolve({name: gistdesc.description, desc: content, data: content.data});
+        json(firstFile.raw_url, (error, content) => {
+          if (error) {
+            console.error('cannot load gist content at: ' + firstFile.raw_url, error);
+            reject('not found');
+          } else if (content) {
+            resolve({name: gistdesc.description, desc: content, data: content.data});
+          }
+        });
       }
       reject('not found');
     });
