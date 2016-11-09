@@ -67,6 +67,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   if (lineup) {
     lineup.changeDataStorage(provider, desc);
   } else {
+    provider.restore(desc);
     lineup = new LineUp(document.getElementById('lugui-wrapper'), provider, lineUpDemoConfig);
     lineup.addPool(document.getElementById('pool'), {
       hideUsed: false,
@@ -81,6 +82,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
         createScriptDesc()
       ]
     }).update();
+
   }
   provider.deriveDefault();
   lineup.update();
