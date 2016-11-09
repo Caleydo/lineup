@@ -26,8 +26,9 @@ declare module "url!*";
 //allow html dependencies
 declare module "import!*";
 
+
+//define System.import as understood by webpack2
 interface ISystem {
   import(module: string): Promise<any>;
 }
-
 declare const System: ISystem;

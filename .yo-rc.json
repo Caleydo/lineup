@@ -15,17 +15,21 @@
       "phovea_importer"
     ],
     "libraryAliases": {
-      "lineupjs": "lineupjs",
-      "d3": "d3/d3",
-      "jquery": "jquery",
-      "font-awesome": "font-awesome",
-      "papaparse": "papaparse"
+      "d3": "d3/d3"
     },
     "ignores": [],
     "extensions": [],
     "name": "lineup_demos",
     "author": "Samuel Gratzl",
     "today": "Fri, 04 Nov 2016 09:47:30 GMT",
-    "githubAccount": "sgratzl"
+    "githubAccount": "sgratzl",
+    "libraryExternals": [
+      "lineupjs",
+      "d3",
+      "jquery",
+      "font-awesome",
+      "d3",
+      "papaparse"
+    ]
   }
 }
