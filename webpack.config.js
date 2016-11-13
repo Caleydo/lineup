@@ -83,7 +83,8 @@ function testPhoveaModules(modules) {
 }
 
 // use ueber registry file if available
-const registryFile = exists(resolve(__dirname, '..', 'phovea_registry.js')) ? '../phovea_registry.js' : './phovea_registry.js';
+const isUeberContext = exists(resolve(__dirname, '..', 'phovea_registry.js'));
+const registryFile = isUeberContext ? '../phovea_registry.js' : './phovea_registry.js';
 
 /**
  * inject the registry to be included
@@ -118,11 +119,11 @@ function generateWebpack(options) {
       // Add `.ts` and `.tsx` as a resolvable extension.
       extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
       alias: Object.assign({}, options.libs || {}),
-      //fallback to the directory above if they are siblings
-      modules: [
+      //fallback to the directory above if they are siblings just in the ueber context
+      modules: isUeberContext ? [
         resolve(__dirname, '../'),
         'node_modules'
-      ]
+      ] : ['node_modules']
     },
     plugins: [
       new webpack.BannerPlugin({
