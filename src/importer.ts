@@ -97,7 +97,7 @@ function createImporter(parent: Element) {
         const data = results[0].data;
         const header = data.shift();
 
-        buildCSV = importTable(editors, this.$parent, header, data, name);
+        buildCSV = importTable(editors, $parent, header, data, name);
       });
     }
   };
