@@ -104,22 +104,21 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
     <HTMLElement>document.querySelector('#caleydoHeader'),
     {appLink: new AppHeaderLink('LineUp Demos')}
   );
-  var currentName = 'No Name';
   var lineup: LineUp = null;
 
   header.addRightMenu(`<span title="Download CSV"><i class="fa fa-download"></i><sub class="fa fa-file-excel-o"></sub></span>`, () => {
     if (lineup) {
-      exportToCSV(lineup, currentName);
+      exportToCSV(lineup, document.title);
     }
   });
   header.addRightMenu(`<span title="Download JSON"><i class="fa fa-download"></i><sub class="fa fa-file-code-o"></sub></span>`, () => {
     if (lineup) {
-      exportToJSON(lineup, currentName);
+      exportToJSON(lineup, document.title);
     }
   });
   header.addRightMenu(`<span title="Upload to Github Gist"><i class="fa fa-cloud-upload"></i><sub class="fa fa-github"></sub></span>`, () => {
     if (lineup) {
-      saveToGist(lineup, currentName);
+      saveToGist(lineup, document.title);
     }
   });
   header.mainMenu.appendChild(document.getElementById('poolSelector'));
@@ -137,7 +136,6 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
     const desc = dataset.desc;
     const file = dataset.url;
     setBusy(true);
-    currentName = dataset.name;
     d3.dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
       lineup = initLineup(dataset.name, desc, _data, lineup);
       setBusy(false);
@@ -157,9 +155,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   }
   var old = history.state ? history.state.id : (window.location.hash ? window.location.hash.substr(1) : '');
   if (old.match(/gist:.*/)) {
-    let name = 'Github Gist ' + old.substr(5);
     let gist = old.substr(5);
-    currentName = name;
     loadGist(gist).then(({name, desc, data}) => {
       lineup = initLineup(name, desc, data, lineup);
       setBusy(false);

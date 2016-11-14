@@ -10,7 +10,7 @@ export default function exportToCSV(lineup: LineUp, name: string) {
   lineup.data.exportTable(first).then(function(str) {
     //create blob and save it
     var blob = new Blob([str], {type: 'text/csv;charset=utf-8'});
-    saveAs(blob, 'LineUp-' + name + '.csv');
+    saveAs(blob, name + '.csv');
   });
 }
 
@@ -27,5 +27,5 @@ function dumpLayout(lineup: LineUp) {
 export function exportToJSON(lineup: LineUp, name: string) {
   const str = dumpLayout(lineup);
   var blob = new Blob([str], {type: 'application/json;charset=utf-8'});
-  saveAs(blob, 'LineUp-' + name + '.json');
+  saveAs(blob, name + '.json');
 }
