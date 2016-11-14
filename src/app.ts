@@ -10,8 +10,8 @@ import {deriveColors} from 'lineupjs/src';
 import * as d3 from 'd3';
 import datasets, {IDataSetSpec} from './datasets';
 import {load as loadGist, save as saveToGist} from './gist';
-import exportToCSV from './export';
-import importTable from './importer';
+import exportToCSV, {exportToJSON} from './export';
+import importFile from './importer';
 
 function setBusy(busy = true) {
   const d = <HTMLDivElement>document.querySelector('#app > div.busy');
@@ -107,20 +107,25 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   var currentName = 'No Name';
   var lineup: LineUp = null;
 
-  header.addRightMenu(`<i class="fa fa-download"></i>`, () => {
+  header.addRightMenu(`<span title="Download CSV"><i class="fa fa-download"></i><sub class="fa fa-file-excel-o"></sub></span>`, () => {
     if (lineup) {
       exportToCSV(lineup, currentName);
     }
   });
-  header.addRightMenu(`<i class="fa fa-github"></i>`, () => {
+  header.addRightMenu(`<span title="Download JSON"><i class="fa fa-download"></i><sub class="fa fa-file-code-o"></sub></span>`, () => {
+    if (lineup) {
+      exportToJSON(lineup, currentName);
+    }
+  });
+  header.addRightMenu(`<span title="Upload to Github Gist"><i class="fa fa-cloud-upload"></i><sub class="fa fa-github"></sub></span>`, () => {
     if (lineup) {
       saveToGist(lineup, currentName);
     }
   });
   header.mainMenu.appendChild(document.getElementById('poolSelector'));
   header.rightMenu.insertBefore(document.getElementById('datasetSelector'), header.rightMenu.firstChild);
-  header.addRightMenu(`<i class="fa fa-upload"></i>`, () => {
-    importTable().then(({name, desc, data}) => {
+  header.addRightMenu(`<span title="Upload CSV/JSON"><i class="fa fa-upload"></i><sub><i class="fa fa-file-excel-o"></i><i class="fa fa-file-code-o"></i></sub></span>`, () => {
+    importFile().then(({name, desc, data}) => {
       lineup = initLineup(name, desc, data, lineup);
       setBusy(false);
     }).catch(() => {

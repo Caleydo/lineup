@@ -13,3 +13,19 @@ export default function exportToCSV(lineup: LineUp, name: string) {
     saveAs(blob, 'LineUp-' + name + '.csv');
   });
 }
+
+function dumpLayout(lineup: LineUp) {
+  //full spec
+  var s = lineup.dump();
+  s.columns = (<any>lineup.data).columns;
+  s.data = (<any>lineup.data).data;
+
+  //stringify with pretty print
+  return JSON.stringify(s, null, '\t');
+}
+
+export function exportToJSON(lineup: LineUp, name: string) {
+  const str = dumpLayout(lineup);
+  var blob = new Blob([str], {type: 'application/json;charset=utf-8'});
+  saveAs(blob, 'LineUp-' + name + '.json');
+}
