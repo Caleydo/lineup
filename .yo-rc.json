@@ -1,7 +1,7 @@
 {
   "generator-phovea": {
     "type": "app",
-    "app": "lineup_demos",
+    "app": "lineup_demos_source",
     "entries": {
       "app": "./src/index.ts"
     },
@@ -20,7 +20,7 @@
     },
     "ignores": [],
     "extensions": [],
-    "name": "lineup_demos",
+    "name": "lineup_demos_source",
     "author": "Samuel Gratzl",
     "today": "Fri, 04 Nov 2016 09:47:30 GMT",
     "githubAccount": "sgratzl",
