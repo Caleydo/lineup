@@ -2,12 +2,12 @@
  * Created by sam on 04.11.2016.
  */
 
-import * as dataSP500 from 'file!./data/sp500_2015-06-26.csv';
+import * as dataSP500 from 'file-loader!./data/sp500_2015-06-26.csv';
 import * as descSP500 from './data/sp500.json';
-import * as dataWUR from 'file!./data/wur2013.txt';
+import * as dataWUR from 'file-loader!./data/wur2013.txt';
 import * as descWUR from './data/data.json';
 import * as descWURSmall from './data/data_small.json';
-import * as dataProsperity from 'file!./data/2015_Variables.csv';
+import * as dataProsperity from 'file-loader!./data/2015_Variables.csv';
 import * as descProsperity from './data/prosperity.json';
 
 export interface IDataSetSpec {
