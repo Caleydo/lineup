@@ -7,7 +7,8 @@
     },
     "libraries": [
       "lineupjs",
-      "d3"
+      "d3",
+      "file-saver"
     ],
     "modules": [
       "phovea_core",
@@ -26,9 +27,9 @@
     "libraryExternals": [
       "lineupjs",
       "d3",
+      "file-saver",
       "jquery",
       "font-awesome",
-      "d3",
       "papaparse"
     ]
   }

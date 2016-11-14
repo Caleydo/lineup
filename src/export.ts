@@ -3,16 +3,7 @@
  */
 
 import LineUp from 'lineupjs/src/lineup';
-
-function saveAs(blob: Blob, name: string) {
-  const downloadLink = document.createElement('a');
-  downloadLink.href = URL.createObjectURL(blob);
-  (<any>downloadLink).download = name + '.csv';
-
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-}
+import {saveAs} from 'file-saver';
 
 export default function exportToCSV(lineup: LineUp, name: string) {
   const first = lineup.data.getRankings()[0];
