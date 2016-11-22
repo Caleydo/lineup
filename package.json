@@ -75,7 +75,7 @@
   "name": "lineup_demos_source",
   "description": "",
   "homepage": "https://phovea.caleydo.org",
-  "version": "0.0.1",
+  "version": "0.0.1-SNAPSHOT",
   "author": {
     "name": "Samuel Gratzl",
     "email": "samuel_gratzl@gmx.at",
