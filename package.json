@@ -29,7 +29,7 @@
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
     "predist": "npm run build",
-    "dist": "mkdirp dist && cd build && tar cvzf ../dist/lineup_demos_source.tar.gz *"
+    "dist": "mkdirp dist && cd build && tar cvzf ../dist/lineup.tar.gz *"
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.35",
@@ -67,7 +67,7 @@
     "@types/file-saver": "0.0.0",
     "d3": "^3.5.17",
     "file-saver": "^1.3.3",
-    "lineupjs": "github:Caleydo/lineup.js#feature_146_react",
+    "lineupjs": "github:Caleydo/lineup.js",
     "phovea_bootstrap_fontawesome": "github:phovea/phovea_bootstrap_fontawesome",
     "phovea_core": "github:phovea/phovea_core",
     "phovea_importer": "github:phovea/phovea_importer"
@@ -83,11 +83,10 @@
   },
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/sgratzl/lineup_demos_source/issues"
+    "url": "https://github.com/Caleydo/lineup/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sgratzl/lineup_demos_source.git"
-  },
-  "main": "build/lineup_demos_source.js"
+    "url": "https://github.com/Caleydo/lineup.git"
+  }
 }
