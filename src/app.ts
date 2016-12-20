@@ -102,7 +102,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
 {
   const header = createHeader(
     <HTMLElement>document.querySelector('#caleydoHeader'),
-    {appLink: new AppHeaderLink('LineUp Demos')}
+    {appLink: new AppHeaderLink('LineUp')}
   );
   var lineup: LineUp = null;
 
