@@ -1,4 +1,4 @@
-lineup_demos_source [![Phovea][phovea-image]][phovea-url] [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+LineUp [![Phovea][phovea-image]][phovea-url] [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 =====================
 
 
@@ -7,8 +7,8 @@ Installation
 ------------
 
 ```
-git clone https://github.com/sgratzl/lineup_demos_source.git
-cd lineup_demos_source
+git clone https://github.com/Caleydo/lineup.git
+cd lineup
 npm install
 ```
 
@@ -36,9 +36,9 @@ This repository is part of **[Phovea](http://phovea.caleydo.org/)**, a platform 
 
 [phovea-image]: https://img.shields.io/badge/Phovea-Application-1BA64E.svg
 [phovea-url]: https://phovea.caleydo.org
-[npm-image]: https://badge.fury.io/js/lineup_demos_source.svg
-[npm-url]: https://npmjs.org/package/lineup_demos_source
-[travis-image]: https://travis-ci.org/sgratzl/lineup_demos_source.svg?branch=master
-[travis-url]: https://travis-ci.org/sgratzl/lineup_demos_source
-[daviddm-image]: https://david-dm.org/sgratzl/lineup_demos_source.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/sgratzl/lineup_demos_source
+[npm-image]: https://badge.fury.io/js/lineup.svg
+[npm-url]: https://npmjs.org/package/lineup
+[travis-image]: https://travis-ci.org/Caleydo/lineup.svg?branch=master
+[travis-url]: https://travis-ci.org/Caleydo/lineup
+[daviddm-image]: https://david-dm.org/Caleydo/lineup.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/Caleydo/lineup
