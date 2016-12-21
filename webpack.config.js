@@ -87,9 +87,9 @@ function testPhoveaModules(modules) {
   };
 }
 
-// use ueber registry file if available
-const isUeberContext = fs.existsSync(resolve(__dirname, '..', 'phovea_registry.js'));
-const registryFile = isUeberContext ? '../phovea_registry.js' : './phovea_registry.js';
+// use workspace registry file if available
+const isWorkspaceContext = fs.existsSync(resolve(__dirname, '..', 'phovea_registry.js'));
+const registryFile = isWorkspaceContext ? '../phovea_registry.js' : './phovea_registry.js';
 const actBuildInfoFile = `file-loader?name=buildInfo.json!${buildInfo.tmpFile()}`;
 
 /**
@@ -125,8 +125,8 @@ function generateWebpack(options) {
       // Add `.ts` and `.tsx` as a resolvable extension.
       extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
       alias: Object.assign({}, options.libs || {}),
-      //fallback to the directory above if they are siblings just in the ueber context
-      modules: isUeberContext ? [
+      //fallback to the directory above if they are siblings just in the workspace context
+      modules: isWorkspaceContext ? [
         resolve(__dirname, '../'),
         'node_modules'
       ] : ['node_modules']

@@ -14,4 +14,4 @@ import 'phovea_core/phovea_registry.js';
 import 'phovea_bootstrap_fontawesome/phovea_registry.js';
 import 'phovea_importer/phovea_registry.js';
 //self
-register('lineup_demos_source',require('./phovea.js'));
+register('lineup',require('./phovea.js'));

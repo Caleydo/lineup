@@ -29,7 +29,10 @@
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
     "predist": "npm run build",
-    "dist": "mkdirp dist && cd build && tar cvzf ../dist/lineup.tar.gz *"
+    "dist": "mkdirp dist && cd build && tar cvzf ../dist/lineup.tar.gz *",
+    "predocker": "npm run build",
+    "docker": "docker build -t lineup -f deploy/Dockerfile .",
+    "prepublish": "npm run build"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.35",
@@ -88,5 +91,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Caleydo/lineup.git"
-  }
+  },
+  "private": true
 }
