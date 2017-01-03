@@ -8,8 +8,8 @@ import 'file-loader?name=robots.txt!./robots.txt';
 import 'file-loader?name=favicon.ico!./favicon.ico';
 import 'file-loader?name=favicon.png!./favicon.png';
 
-import 'phovea_bootstrap_fontawesome/src/_bootstrap';
-import 'phovea_bootstrap_fontawesome/src/_font-awesome';
+import 'phovea_ui/src/_bootstrap';
+import 'phovea_ui/src/_font-awesome';
 import './style.scss';
 import 'lineupjs/src/style.scss';
 

@@ -2,7 +2,7 @@
  * Created by sam on 04.11.2016.
  */
 
-import {create as createHeader, AppHeaderLink} from 'phovea_bootstrap_fontawesome/src/header';
+import {create as createHeader, AppHeaderLink} from 'phovea_ui/src/header';
 import LineUp from 'lineupjs/src/lineup';
 import {LocalDataProvider} from 'lineupjs/src/provider';
 import {createStackDesc, createNestedDesc, createScriptDesc} from 'lineupjs/src/model';

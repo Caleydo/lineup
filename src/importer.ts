@@ -3,7 +3,7 @@
  */
 
 import {selectFileLogic} from 'phovea_importer/src/index';
-import {generateDialog} from 'phovea_bootstrap_fontawesome/src/dialogs';
+import {generateDialog} from 'phovea_ui/src/dialogs';
 import {parseCSV} from 'phovea_importer/src//parser';
 import * as d3 from 'd3';
 import {createValueTypeEditors} from 'phovea_importer/src//valuetypes';
