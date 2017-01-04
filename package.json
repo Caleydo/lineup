@@ -1,4 +1,27 @@
 {
+  "name": "lineup",
+  "description": "",
+  "homepage": "https://phovea.caleydo.org",
+  "version": "1.0.0-SNAPSHOT",
+  "private": true,
+  "author": {
+    "name": "Samuel Gratzl",
+    "email": "samuel_gratzl@gmx.at",
+    "url": ""
+  },
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/Caleydo/lineup/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Caleydo/lineup.git"
+  },
+  "engines": {
+    "npm": ">= 3",
+    "node": ">= 6",
+    "iojs": ">= 3"
+  },
   "files": [
     "src",
     "index.js",
@@ -6,11 +29,6 @@
     "phovea_registry.js",
     "build"
   ],
-  "engines": {
-    "npm": ">= 3",
-    "node": ">= 6",
-    "iojs": ">= 3"
-  },
   "scripts": {
     "compile": "tsc",
     "lint": "tslint -c tslint.json src/**.ts tests/**.ts",
@@ -28,11 +46,21 @@
     "release:major": "npm version major && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
-    "predist": "npm run build",
+    "predist": "npm run build && npm run docs",
     "dist": "mkdirp dist && cd build && tar cvzf ../dist/lineup.tar.gz *",
     "predocker": "npm run build",
     "docker": "docker build -t lineup -f deploy/Dockerfile .",
     "prepublish": "npm run build"
+  },
+  "dependencies": {
+    "@types/d3": "3.5.36",
+    "@types/file-saver": "0.0.0",
+    "d3": "3.5.17",
+    "file-saver": "1.3.3",
+    "lineupjs": "1.0.0",
+    "phovea_ui": "github:phovea/phovea_ui#develop",
+    "phovea_core": "github:phovea/phovea_core#develop",
+    "phovea_importer": "github:phovea/phovea_importer#develop"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.35",
@@ -64,33 +92,5 @@
     "webpack": "2.1.0-beta.26",
     "webpack-dev-server": "2.1.0-beta.10",
     "extract-loader": "0.0.2"
-  },
-  "dependencies": {
-    "@types/d3": "3.5.36",
-    "@types/file-saver": "0.0.0",
-    "d3": "3.5.17",
-    "file-saver": "1.3.3",
-    "lineupjs": "1.0.0",
-    "phovea_ui": "github:phovea/phovea_ui#v0.0.5",
-    "phovea_core": "github:phovea/phovea_core#v0.0.5",
-    "phovea_importer": "github:phovea/phovea_importer#v0.0.5"
-  },
-  "name": "lineup",
-  "description": "",
-  "homepage": "https://phovea.caleydo.org",
-  "version": "1.0.0",
-  "author": {
-    "name": "Samuel Gratzl",
-    "email": "samuel_gratzl@gmx.at",
-    "url": ""
-  },
-  "license": "BSD-3-Clause",
-  "bugs": {
-    "url": "https://github.com/Caleydo/lineup/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Caleydo/lineup.git"
-  },
-  "private": true
+  }
 }

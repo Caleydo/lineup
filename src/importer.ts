@@ -12,7 +12,7 @@ import {importTable} from 'phovea_importer/src//importtable';
 
 function deriveColumns(columns: any[]) {
   return columns.map((col) => {
-    var r: any = {
+    const r: any = {
       column: col.column,
       label: col.name
     };
@@ -28,7 +28,7 @@ function deriveColumns(columns: any[]) {
         r[k] = col.lineup[k];
       });
     }
-    var val = col.value;
+    const val = col.value;
     switch (val.type) {
       case 'string':
         r.type = 'string';
@@ -79,10 +79,10 @@ function loadJSON(file: File, name: string) {
 function createImporter(parent: Element) {
   const $parent = d3.select(parent).append('div').classed('caleydo-importer', true);
 
-  var buildCSV = null;
-  var jsonDesc = null;
+  let buildCSV = null;
+  let jsonDesc = null;
   const selectedFile = (file: File) => {
-    var name = file.name;
+    let name = file.name;
     const extension = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
     name = name.substring(0, name.lastIndexOf('.')); //remove .csv
 
@@ -120,7 +120,7 @@ export default function importFile() {
     const dialog = generateDialog('Import CSV/JSON', 'Import CSV/JSON');
     const importer = createImporter(dialog.body);
 
-    var submitted = false;
+    let submitted = false;
 
     dialog.onSubmit(() => {
       const r = importer.getResult();
