@@ -12,7 +12,7 @@
     ],
     "modules": [
       "phovea_core",
-      "phovea_bootstrap_fontawesome",
+      "phovea_ui",
       "phovea_importer"
     ],
     "libraryAliases": {
