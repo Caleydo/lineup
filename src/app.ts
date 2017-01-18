@@ -140,7 +140,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   };
 
   {
-    let base = <HTMLElement>document.querySelector('#datasetSelector ul');
+    const base = <HTMLElement>document.querySelector('#datasetSelector ul');
     datasets.forEach((d) => {
       const li = document.createElement('li');
       li.innerHTML = `<a href="#${d.id}">${d.name}</a>`;
@@ -152,13 +152,13 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   }
   const old = history.state ? history.state.id : (window.location.hash ? window.location.hash.substr(1) : '');
   if (old.match(/gist:.*/)) {
-    let gist = old.substr(5);
+    const gist = old.substr(5);
     loadGist(gist).then(({name, desc, data}) => {
       lineup = initLineup(name, desc, data, lineup);
       setBusy(false);
     });
   } else {
-    let choose = datasets.filter((d) => d.id === old);
+    const choose = datasets.filter((d) => d.id === old);
     if (choose.length > 0) {
       loadDataset(choose[0]);
     } else {
