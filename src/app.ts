@@ -3,11 +3,11 @@
  */
 
 import {create as createHeader, AppHeaderLink} from 'phovea_ui/src/header';
-import LineUp from 'lineupjs/src/lineup';
+import LineUp,{ILineUpConfig} from 'lineupjs/src/lineup';
 import {LocalDataProvider} from 'lineupjs/src/provider';
 import {createStackDesc, createNestedDesc, createScriptDesc} from 'lineupjs/src/model';
 import {deriveColors} from 'lineupjs/src';
-import * as d3 from 'd3';
+import {extent, dsv} from 'd3';
 import datasets, {IDataSetSpec} from './datasets';
 import {load as loadGist, save as saveToGist} from './gist';
 import exportToCSV, {exportToJSON} from './export';
@@ -27,8 +27,8 @@ interface IDataSet {
 function fixMissing(columns, data) {
   columns.forEach((col) => {
     if (col.type === 'number' && !col.domain) {
-      var old = col.domain || [NaN, NaN];
-      var minmax = d3.extent(data, (row) => {
+      const old = col.domain || [NaN, NaN];
+      const minmax = extent(data, (row) => {
         return row[col.column].length === 0 ? undefined : +(row[col.column]);
       });
       col.domain = [
@@ -36,22 +36,19 @@ function fixMissing(columns, data) {
         isNaN(old[1]) ? minmax[1] : old[1]
       ];
     } else if (col.type === 'categorical' && !col.categories) {
-      var sset = d3.set(data.map((row) => {
-        return row[col];
-      }));
-      col.categories = sset.values().sort();
+      const sset = new Set(data.map((row) => row[col]));
+      col.categories = Array.from(sset).sort();
     }
   });
 }
 
-const lineUpDemoConfig = {
+const lineUpDemoConfig: ILineUpConfig = {
   header: {
     autoRotateLabels: true
   },
   renderingOptions: {
     stacked: true,
-    histograms: true,
-    animated: true
+    histograms: true
   },
   body: {
     freezeCols: 0,
@@ -88,7 +85,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   lineup.update();
 
   //sort by stacked columns
-  var cols = provider.getRankings();
+  const cols = provider.getRankings();
   cols.forEach((rankCol) => {
     rankCol.children.forEach((col) => {
       if (col.desc.type === 'stack') {
@@ -104,7 +101,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
     <HTMLElement>document.querySelector('#caleydoHeader'),
     {appLink: new AppHeaderLink('LineUp')}
   );
-  var lineup: LineUp = null;
+  let lineup: LineUp = null;
 
   header.addRightMenu(`<span title="Download CSV"><i class="fa fa-download"></i><sub class="fa fa-file-excel-o"></sub></span>`, () => {
     if (lineup) {
@@ -136,14 +133,14 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
     const desc = dataset.desc;
     const file = dataset.url;
     setBusy(true);
-    d3.dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
+    dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
       lineup = initLineup(dataset.name, desc, _data, lineup);
       setBusy(false);
     });
   };
 
   {
-    let base = <HTMLElement>document.querySelector('#datasetSelector ul');
+    const base = <HTMLElement>document.querySelector('#datasetSelector ul');
     datasets.forEach((d) => {
       const li = document.createElement('li');
       li.innerHTML = `<a href="#${d.id}">${d.name}</a>`;
@@ -153,15 +150,15 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
       base.appendChild(li);
     });
   }
-  var old = history.state ? history.state.id : (window.location.hash ? window.location.hash.substr(1) : '');
+  const old = history.state ? history.state.id : (window.location.hash ? window.location.hash.substr(1) : '');
   if (old.match(/gist:.*/)) {
-    let gist = old.substr(5);
+    const gist = old.substr(5);
     loadGist(gist).then(({name, desc, data}) => {
       lineup = initLineup(name, desc, data, lineup);
       setBusy(false);
     });
   } else {
-    let choose = datasets.filter((d) => d.id === old);
+    const choose = datasets.filter((d) => d.id === old);
     if (choose.length > 0) {
       loadDataset(choose[0]);
     } else {

@@ -29,7 +29,7 @@ export function load(gistid: string) {
 
 function dumpLayout(lineup: LineUp) {
   //full spec
-  var s = lineup.dump();
+  const s = lineup.dump();
   s.columns = (<any>lineup.data).columns;
   s.data = (<any>lineup.data).data;
 
@@ -53,7 +53,7 @@ export function save(lineup: LineUp, name: string) {
     if (error) {
       console.log('cant store to gist', error);
     } else {
-      var id = data.id;
+      const id = data.id;
       document.title = 'LineUp - ' + (args.description || 'Custom');
       history.pushState({id: 'gist:' + id}, 'LineUp - ' + (args.description || 'Custom'), '#gist:' + id);
     }
