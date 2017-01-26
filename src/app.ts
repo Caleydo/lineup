@@ -36,7 +36,7 @@ function fixMissing(columns, data) {
         isNaN(old[1]) ? minmax[1] : old[1]
       ];
     } else if (col.type === 'categorical' && !col.categories) {
-      const sset = new Set(data.map((row) => row[col]));
+      const sset = new Set(data.map((row) => row[col.column]));
       col.categories = Array.from(sset).sort();
     }
   });
