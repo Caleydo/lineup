@@ -31,8 +31,7 @@
     "predist": "npm run build",
     "dist": "mkdirp dist && cd build && tar cvzf ../dist/lineup.tar.gz *",
     "predocker": "npm run build",
-    "docker": "docker build -t lineup -f deploy/Dockerfile .",
-    "prepublish": "npm run build"
+    "docker": "docker build -t lineup -f deploy/Dockerfile ."
   },
   "devDependencies": {
     "@types/jasmine": "2.5.35",
