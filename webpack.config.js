@@ -88,12 +88,12 @@ function testPhoveaModules(modules) {
   };
 }
 
+
 // use workspace registry file if available
 const isWorkspaceContext = fs.existsSync(resolve(__dirname, '..', 'phovea_registry.js'));
 const registryFile = isWorkspaceContext ? '../phovea_registry.js' : './phovea_registry.js';
-const screenshot = fs.existsSync(resolve(__dirname, 'media/screenshot.png')) ? `buildInfoScreenshot.png`: null;
-const actScreenshotName = screenshot ? `file-loader?name=${screenshot}!${resolve(__dirname, 'media/screenshot.png')}`: null;
-const actBuildInfoFile = `file-loader?name=buildInfo.json!${buildInfo.tmpFile(screenshot)}`;
+const actMetaData = `file-loader?name=phoveaMetaData.json!${buildInfo.metaDataTmpFile(pkg)}`;
+const actBuildInfoFile = `file-loader?name=buildInfo.json!${buildInfo.tmpFile()}`;
 
 /**
  * inject the registry to be included
@@ -101,10 +101,7 @@ const actBuildInfoFile = `file-loader?name=buildInfo.json!${buildInfo.tmpFile(sc
  * @returns {*}
  */
 function injectRegistry(entry) {
-  const extraFiles = [registryFile, actBuildInfoFile];
-  if (screenshot) {
-    extraFiles.push(actScreenshotName);
-  }
+  const extraFiles = [registryFile, actBuildInfoFile, actMetaData];
   //build also the registry
   if (typeof entry === 'string') {
     return extraFiles.concat(entry);
