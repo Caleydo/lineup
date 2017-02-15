@@ -1,7 +1,11 @@
 lineup [![Phovea][phovea-image]][phovea-url] [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 =====================
 
+LineUp is a Phovea application based on [LineUp.js](http://github.com/Caleydo/lineup.js)
 
+<center>
+![screenshot](media/screenshot.png)
+</center>
 
 Installation
 ------------
