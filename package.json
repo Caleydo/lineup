@@ -49,8 +49,7 @@
     "predist": "npm run build && npm run docs",
     "dist": "mkdirp dist && cd build && tar cvzf ../dist/lineup.tar.gz *",
     "predocker": "npm run build",
-    "docker": "docker build -t lineup -f deploy/Dockerfile .",
-    "prepublish": "npm run build"
+    "docker": "docker build -t lineup -f deploy/Dockerfile ."
   },
   "dependencies": {
     "@types/d3": "3.5.36",
