@@ -9,14 +9,14 @@ export default function exportToCSV(lineup: LineUp, name: string) {
   const first = lineup.data.getRankings()[0];
   lineup.data.exportTable(first).then(function(str) {
     //create blob and save it
-    var blob = new Blob([str], {type: 'text/csv;charset=utf-8'});
+    const blob = new Blob([str], {type: 'text/csv;charset=utf-8'});
     saveAs(blob, name + '.csv');
   });
 }
 
 function dumpLayout(lineup: LineUp) {
   //full spec
-  var s = lineup.dump();
+  const s = lineup.dump();
   s.columns = (<any>lineup.data).columns;
   s.data = (<any>lineup.data).data;
 
@@ -26,6 +26,6 @@ function dumpLayout(lineup: LineUp) {
 
 export function exportToJSON(lineup: LineUp, name: string) {
   const str = dumpLayout(lineup);
-  var blob = new Blob([str], {type: 'application/json;charset=utf-8'});
+  const blob = new Blob([str], {type: 'application/json;charset=utf-8'});
   saveAs(blob, name + '.json');
 }
