@@ -21,8 +21,9 @@ export function load(gistid: string) {
             resolve({name: gistdesc.description, desc: content, data: content.data});
           }
         });
-      }
-      reject('not found');
+      } else {
+		reject('not found');
+	  }
     });
   });
 }
