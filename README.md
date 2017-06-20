@@ -4,7 +4,7 @@ lineup [![Phovea][phovea-image]][phovea-url] [![NPM version][npm-image]][npm-url
 LineUp is a Phovea application based on [LineUp.js](http://github.com/Caleydo/lineup.js)
 
 <center>
-![screenshot](./media/screenshot.png)
+![screenshot](media/screenshot.png?raw=true "Screenshot"))
 </center>
 
 Installation
