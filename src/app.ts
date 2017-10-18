@@ -42,17 +42,12 @@ function fixMissing(columns, data) {
   });
 }
 
-const lineUpDemoConfig: ILineUpConfig = {
+const lineUpDemoConfig: Partial<ILineUpConfig> = {
   header: {
-    autoRotateLabels: true
-  },
-  renderingOptions: {
-    stacked: true,
-    histograms: true
+    summary: true
   },
   body: {
-    freezeCols: 0,
-    renderer: 'canvas'
+    renderer: 'engine'
   }
 };
 
