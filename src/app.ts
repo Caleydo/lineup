@@ -13,11 +13,6 @@ import {load as loadGist, save as saveToGist} from './gist';
 import exportToCSV, {exportToJSON} from './export';
 import importFile from './importer';
 
-function setBusy(busy = true) {
-  const d = <HTMLDivElement>document.querySelector('#app > div.busy');
-  d.className = 'busy ' + (busy ? '' : 'hidden');
-}
-
 interface IDataSet {
   name: string;
   url: string;
@@ -47,7 +42,8 @@ const lineUpDemoConfig: Partial<ILineUpConfig> = {
     summary: true
   },
   body: {
-    renderer: 'engine'
+    renderer: 'engine',
+    rowPadding: 0
   }
 };
 
@@ -60,7 +56,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
     lineup.changeDataStorage(provider, desc);
   } else {
     provider.restore(desc);
-    lineup = new LineUp(document.getElementById('lugui-wrapper'), provider, lineUpDemoConfig);
+    lineup = new LineUp(document.getElementById('app'), provider, lineUpDemoConfig);
     lineup.addPool(document.getElementById('pool'), {
       hideUsed: false,
       elemWidth: 120,
@@ -118,7 +114,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   header.addRightMenu(`<span title="Upload CSV/JSON"><i class="fa fa-upload"></i><sub><i class="fa fa-file-excel-o"></i><i class="fa fa-file-code-o"></i></sub></span>`, () => {
     importFile().then(({name, desc, data}) => {
       lineup = initLineup(name, desc, data, lineup);
-      setBusy(false);
+      header.ready();
     }).catch(() => {
       // aborted ok
     });
@@ -127,10 +123,10 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   const loadDataset = (dataset: IDataSetSpec) => {
     const desc = dataset.desc;
     const file = dataset.url;
-    setBusy(true);
+    header.wait();
     dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
       lineup = initLineup(dataset.name, desc, _data, lineup);
-      setBusy(false);
+      header.ready();
     });
   };
 
@@ -150,7 +146,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
     const gist = old.substr(5);
     loadGist(gist).then(({name, desc, data}) => {
       lineup = initLineup(name, desc, data, lineup);
-      setBusy(false);
+      header.ready();
     });
   } else {
     const choose = datasets.filter((d) => d.id === old);

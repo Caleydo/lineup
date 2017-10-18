@@ -6,20 +6,26 @@ html, body {
   height: 100%;*/
 
   font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
 }
 
-/**
- * basic wrapper of LineUp
- */
-div.lu {
-  clear: both;
-  position: absolute;
-  top: 38px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0;
-  overflow: auto;
+#caleydoHeader {
+  flex: 0 0 auto;
+}
+
+#app {
+  flex: 1 1 auto;
+  position: relative;
+
+  > .lu {
+    position: absolute !important;
+    left: 10px;
+    top: 10px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+  }
 }
 
 form {
@@ -33,3 +39,5 @@ form {
   text-align: center;
   color: #BBB;
 }
+
+@import '~lineupjs/src/styles/engine';

@@ -11,6 +11,5 @@ import 'file-loader?name=favicon.png!./assets/favicon.png';
 import 'phovea_ui/src/_bootstrap';
 import 'phovea_ui/src/_font-awesome';
 import './style.scss';
-import 'lineupjs/src/style.scss';
 
 import './app.ts';
