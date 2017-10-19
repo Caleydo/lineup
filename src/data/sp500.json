@@ -74,9 +74,15 @@
   "sortBy": "Muhlenkamp",
   "layout": {
     "primary": [
+
       {
-        "type": "rank",
-        "width": 45
+        "type": "aggregate"
+      },
+      {
+        "type": "rank"
+      },
+      {
+        "type": "selection"
       },
       {
         "column": "Ticker",

@@ -48,6 +48,15 @@
   "layout": {
     "primary": [
       {
+        "type": "aggregate"
+      },
+      {
+        "type": "rank"
+      },
+      {
+        "type": "selection"
+      },
+      {
         "column": "schoolname",
         "width": 200
       },

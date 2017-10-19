@@ -67,7 +67,18 @@ export const desc = (() => {
   return {
     columns: desc,
     layout: {
-      primary: defaultColumns.map((d) => ({column: clean(d)}))
+      primary: [
+      {
+        type: 'aggregate'
+      },
+      {
+        type: 'rank'
+      },
+      {
+        type: 'selection'
+      },
+        ...defaultColumns.map((d) => ({column: clean(d)}))
+      ]
     }
   };
 })();
