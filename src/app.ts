@@ -12,7 +12,8 @@ import {load as loadGist, save as saveToGist} from './gist';
 import exportToCSV, {exportToJSON} from './export';
 import importFile from './importer';
 import Taggle from 'taggle/src/v2/Taggle';
-import {LocalDataProvider} from "lineupjs/src/provider";
+import {LocalDataProvider} from 'lineupjs/src/provider';
+import {IStratification} from 'taggle/src/v2/splicer';
 
 interface IDataSet {
   name: string;
@@ -39,7 +40,7 @@ function fixMissing(columns, data) {
 }
 
 
-function initTaggle(name: string, desc: any, _data: any[], taggle?: Taggle) {
+function initTaggle(name: string, desc: any, _data: any[], stratifications: IStratification[], taggle?: Taggle) {
   document.querySelector('[data-header="appLink"]').innerHTML = 'Taggle - '+name;
   document.title = 'Taggle - ' + name;
   fixMissing(desc.columns, _data);
@@ -48,7 +49,9 @@ function initTaggle(name: string, desc: any, _data: any[], taggle?: Taggle) {
     taggle.changeDataStorage(provider, desc);
   } else {
     provider.restore(desc);
-    taggle = new Taggle(document.getElementById('app'), provider);
+    taggle = new Taggle(document.getElementById('app'), provider, {
+      stratifications
+    });
   }
   provider.deriveDefault();
   taggle.update();
@@ -91,7 +94,7 @@ function initTaggle(name: string, desc: any, _data: any[], taggle?: Taggle) {
   header.rightMenu.insertBefore(document.getElementById('datasetSelector'), header.rightMenu.firstChild);
   header.addRightMenu(`<span title="Upload CSV/JSON"><i class="fa fa-upload"></i><sub><i class="fa fa-file-excel-o"></i><i class="fa fa-file-code-o"></i></sub></span>`, () => {
     importFile().then(({name, desc, data}) => {
-      taggle = initTaggle(name, desc, data, taggle);
+      taggle = initTaggle(name, desc, data, [], taggle);
       header.ready();
     }).catch(() => {
       // aborted ok
@@ -102,10 +105,17 @@ function initTaggle(name: string, desc: any, _data: any[], taggle?: Taggle) {
     const desc = dataset.desc;
     const file = dataset.url;
     header.wait();
-    dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
-      taggle = initTaggle(dataset.name, desc, _data, taggle);
-      header.ready();
-    });
+    if (typeof file === 'string') {
+      dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
+        taggle = initTaggle(dataset.name, desc, _data, dataset.stratifications || [], taggle);
+        header.ready();
+      });
+    } else {
+      file().then((_data) => {
+        taggle = initTaggle(dataset.name, desc, _data, dataset.stratifications || [], taggle);
+        header.ready();
+      });
+    }
   };
 
   {
@@ -123,7 +133,7 @@ function initTaggle(name: string, desc: any, _data: any[], taggle?: Taggle) {
   if (old.match(/gist:.*/)) {
     const gist = old.substr(5);
     loadGist(gist).then(({name, desc, data}) => {
-      taggle = initTaggle(name, desc, data, taggle);
+      taggle = initTaggle(name, desc, data, [], taggle);
       header.ready();
     });
   } else {

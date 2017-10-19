@@ -1,0 +1,258 @@
+{
+  "columns": [
+    {
+      "column": "AIDS_Countries",
+      "type": "string"
+    },
+    {
+      "column": "Sex before 15 (15-24, %, 2015)",
+      "domain": [
+        0.5,
+        29.3
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Condom use at last sex (%, 2015)",
+      "domain": [
+        0,
+        72.3
+      ],
+      "type": "number"
+    },
+    {
+      "column": "N. ppl on ART (2015)",
+      "domain": [
+        9,
+        3384160
+      ],
+      "type": "number"
+    },
+    {
+      "column": "% ppl. on ART (2015)",
+      "domain": [
+        3.0,
+        90.0
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Ppl knowing they have HIV (%, 2015)",
+      "domain": [
+        4.0,
+        95.0
+      ],
+      "type": "number"
+    },
+    {
+      "column": "HIV prevention knowledge (age 15-24, %, 2015)",
+      "domain": [
+        4.3,
+        76.4
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Discriminatory attitude (%)",
+      "domain": [
+        11.9,
+        80.1
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Discriminatory attitude scale",
+      "categories": [
+        {
+          "color": "#7a0177",
+          "name": "High"
+        },
+        {
+          "color": "#feebe2",
+          "name": "Low"
+        },
+        {
+          "color": "#f768a1",
+          "name": "Medium"
+        },
+        {
+          "color": "#c51b8a",
+          "name": "Predominant"
+        },
+        {
+          "color": "#fbb4b9",
+          "name": "Slight"
+        },
+        {
+          "color": "#bdc9e1",
+          "name": "Unknown"
+        }
+      ],
+      "type": "categorical"
+    },
+    {
+      "column": "Human devel. index",
+      "categories": [
+        {
+          "color": "#d7191c",
+          "name": "1 Low human development"
+        },
+        {
+          "color": "#fdae61",
+          "name": "2 Medium human development"
+        },
+        {
+          "color": "#a6d96a",
+          "name": "3 High human development"
+        },
+        {
+          "color": "#1a9641",
+          "name": "4 Very high human development"
+        }
+      ],
+      "type": "categorical"
+    },
+    {
+      "column": "Continent",
+      "categories": [
+        {
+          "color": "#b2df8a",
+          "name": "Africa"
+        },
+        {
+          "color": "#a6cee3",
+          "name": "Asia"
+        },
+        {
+          "color": "#1f78b4",
+          "name": "Europe"
+        },
+        {
+          "color": "#e31a1c",
+          "name": "North America"
+        },
+        {
+          "color": "#fb9a99",
+          "name": "Oceania"
+        },
+        {
+          "color": "#33a02c",
+          "name": "South America"
+        }
+      ],
+      "type": "categorical"
+    },
+    {
+      "column": "HIV restrictions on entry, stay, or residence",
+      "categories": [
+        {
+          "color": "#f1a340",
+          "name": "Complete bar"
+        },
+        {
+          "color": "#b35806",
+          "name": "Deportation"
+        },
+        {
+          "color": "#d8daeb",
+          "name": "No information provided"
+        },
+        {
+          "color": "#542788",
+          "name": "No restriction"
+        },
+        {
+          "color": "#fee0b6",
+          "name": "Require proof"
+        },
+        {
+          "color": "#998ec3",
+          "name": "Some restriction"
+        }
+      ],
+      "type": "categorical"
+    },
+    {
+      "column": "Population (2017)",
+      "domain": [
+        285744,
+        1388232693
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Yearly change (%)",
+      "domain": [
+        -0.74,
+        4.1
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Net change",
+      "domain": [
+        -278504,
+        115711130
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Density (P/SqKm)",
+      "domain": [
+        2,
+        8264
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Land Area (SqKm)",
+      "domain": [
+        300,
+        16292614
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Migrants (net)",
+      "domain": [
+        -519644,
+        1001577
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Fert. Rate",
+      "domain": [
+        1.23,
+        7.63
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Med. Age",
+      "domain": [
+        15,
+        47
+      ],
+      "type": "number"
+    },
+    {
+      "column": "Urban Pop (%)",
+      "domain": [
+        8.2,
+        98.2
+      ],
+      "type": "number"
+    },
+    {
+      "column": "World Share (%)",
+      "domain": [
+        0,
+        18.5
+      ],
+      "type": "number"
+    }
+  ],
+  "quotechar": "\"",
+  "separator": ","
+}

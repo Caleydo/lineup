@@ -7,21 +7,23 @@ import * as descSP500 from './data/sp500.json';
 import * as dataWUR from 'file-loader!./data/wur2013.txt';
 import * as descWUR from './data/data.json';
 import * as descWURSmall from './data/data_small.json';
-import * as dataProsperity from 'file-loader!./data/2015_Variables.csv';
-import * as descProsperity from './data/prosperity.json';
+import * as aids from './data/aids';
+import {IStratification} from 'taggle/src/v2/splicer';
 
 export interface IDataSetSpec {
   id: string;
   name: string;
   desc: any;
-  url: string;
+  url?: string|(()=>Promise<any[]>);
+  stratifications?: IStratification[];
 }
 const data: IDataSetSpec[] = [
   {
-    id: 'prosperity',
-    name: 'Legatum Prosperity Index',
-    desc: descProsperity,
-    url: dataProsperity
+    id: 'aids',
+    name: 'AIDS',
+    desc: aids.desc,
+    url: aids.loader,
+    stratifications: aids.stratifications
   },
   {
     id: 'uni',
