@@ -2,8 +2,8 @@
  * Created by sam on 04.11.2016.
  */
 
-import LineUp from 'lineupjs/src/lineup';
 import {json} from 'd3';
+import Taggle from 'taggle/src/v2/Taggle';
 
 export function load(gistid: string) {
   return new Promise((resolve, reject) => {
@@ -28,19 +28,19 @@ export function load(gistid: string) {
   });
 }
 
-function dumpLayout(lineup: LineUp) {
+function dumpLayout(taggle: Taggle) {
   //full spec
-  const s = lineup.dump();
-  s.columns = (<any>lineup.data).columns;
-  s.data = (<any>lineup.data).data;
+  const s = taggle.dump();
+  s.columns = (<any>taggle.data).columns;
+  s.data = (<any>taggle.data).data;
 
   //stringify with pretty print
   return JSON.stringify(s, null, '\t');
 }
 
-export function save(lineup: LineUp, name: string) {
+export function save(taggle: Taggle, name: string) {
   //stringify with pretty print
-  const str = dumpLayout(lineup);
+  const str = dumpLayout(taggle);
   const args = {
     'description': name,
     'public': true,
@@ -55,8 +55,8 @@ export function save(lineup: LineUp, name: string) {
       console.log('cant store to gist', error);
     } else {
       const id = data.id;
-      document.title = 'LineUp - ' + (args.description || 'Custom');
-      history.pushState({id: 'gist:' + id}, 'LineUp - ' + (args.description || 'Custom'), '#gist:' + id);
+      document.title = 'Taggle - ' + (args.description || 'Custom');
+      history.pushState({id: 'gist:' + id}, 'Taggle - ' + (args.description || 'Custom'), '#gist:' + id);
     }
   });
 }

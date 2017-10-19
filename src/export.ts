@@ -2,30 +2,30 @@
  * Created by sam on 04.11.2016.
  */
 
-import LineUp from 'lineupjs/src/lineup';
 import {saveAs} from 'file-saver';
+import Taggle from 'taggle/src/v2/Taggle';
+import ADataProvider from 'lineupjs/src/provider/ADataProvider';
 
-export default function exportToCSV(lineup: LineUp, name: string) {
-  const first = lineup.data.getRankings()[0];
-  lineup.data.exportTable(first).then(function(str) {
+export default function exportToCSV(data: ADataProvider, name: string) {
+  const first = data.getRankings()[0];
+  data.exportTable(first).then(function(str) {
     //create blob and save it
     const blob = new Blob([str], {type: 'text/csv;charset=utf-8'});
     saveAs(blob, name + '.csv');
   });
 }
 
-function dumpLayout(lineup: LineUp) {
+function dumpLayout(taggle: Taggle) {
   //full spec
-  const s = lineup.dump();
-  s.columns = (<any>lineup.data).columns;
-  s.data = (<any>lineup.data).data;
-
+  const s = taggle.dump();
+  s.columns = (<any>taggle.data).columns;
+  s.data = (<any>taggle.data).data;
   //stringify with pretty print
   return JSON.stringify(s, null, '\t');
 }
 
-export function exportToJSON(lineup: LineUp, name: string) {
-  const str = dumpLayout(lineup);
+export function exportToJSON(taggle: Taggle, name: string) {
+  const str = dumpLayout(taggle);
   const blob = new Blob([str], {type: 'application/json;charset=utf-8'});
   saveAs(blob, name + '.json');
 }

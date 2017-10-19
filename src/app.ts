@@ -3,8 +3,7 @@
  */
 
 import {create as createHeader, AppHeaderLink} from 'phovea_ui/src/header';
-import LineUp,{ILineUpConfig} from 'lineupjs/src/lineup';
-import {LocalDataProvider} from 'lineupjs/src/provider';
+
 import {createStackDesc, createNestedDesc, createScriptDesc} from 'lineupjs/src/model';
 import {deriveColors} from 'lineupjs/src';
 import {extent, dsv} from 'd3';
@@ -12,6 +11,8 @@ import datasets, {IDataSetSpec} from './datasets';
 import {load as loadGist, save as saveToGist} from './gist';
 import exportToCSV, {exportToJSON} from './export';
 import importFile from './importer';
+import Taggle from 'taggle/src/v2/Taggle';
+import {LocalDataProvider} from "lineupjs/src/provider";
 
 interface IDataSet {
   name: string;
@@ -37,43 +38,20 @@ function fixMissing(columns, data) {
   });
 }
 
-const lineUpDemoConfig: Partial<ILineUpConfig> = {
-  header: {
-    summary: true
-  },
-  body: {
-    renderer: 'engine',
-    rowPadding: 0
-  }
-};
 
-function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
-  document.querySelector('[data-header="appLink"]').innerHTML = 'LineUp - '+name;
-  document.title = 'LineUp - ' + name;
+function initTaggle(name: string, desc: any, _data: any[], taggle?: Taggle) {
+  document.querySelector('[data-header="appLink"]').innerHTML = 'Taggle - '+name;
+  document.title = 'Taggle - ' + name;
   fixMissing(desc.columns, _data);
   const provider = new LocalDataProvider(_data, deriveColors(desc.columns));
-  if (lineup) {
-    lineup.changeDataStorage(provider, desc);
+  if (taggle) {
+    taggle.changeDataStorage(provider, desc);
   } else {
     provider.restore(desc);
-    lineup = new LineUp(document.getElementById('app'), provider, lineUpDemoConfig);
-    lineup.addPool(document.getElementById('pool'), {
-      hideUsed: false,
-      elemWidth: 120,
-      elemHeight: 30,
-      layout: 'grid',
-      width: 360,
-      addAtEndOnClick: true,
-      additionalDesc: [
-        createStackDesc(),
-        createNestedDesc(),
-        createScriptDesc()
-      ]
-    }).update();
-
+    taggle = new Taggle(document.getElementById('app'), provider);
   }
   provider.deriveDefault();
-  lineup.update();
+  taggle.update();
 
   //sort by stacked columns
   const cols = provider.getRankings();
@@ -84,7 +62,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
       }
     });
   });
-  return lineup;
+  return taggle;
 }
 
 {
@@ -92,28 +70,28 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
     <HTMLElement>document.querySelector('#caleydoHeader'),
     {appLink: new AppHeaderLink('LineUp')}
   );
-  let lineup: LineUp = null;
+  let taggle: Taggle = null;
 
   header.addRightMenu(`<span title="Download CSV"><i class="fa fa-download"></i><sub class="fa fa-file-excel-o"></sub></span>`, () => {
-    if (lineup) {
-      exportToCSV(lineup, document.title);
+    if (taggle) {
+      exportToCSV(taggle.data, document.title);
     }
   });
   header.addRightMenu(`<span title="Download JSON"><i class="fa fa-download"></i><sub class="fa fa-file-code-o"></sub></span>`, () => {
-    if (lineup) {
-      exportToJSON(lineup, document.title);
+    if (taggle) {
+      exportToJSON(taggle, document.title);
     }
   });
   header.addRightMenu(`<span title="Upload to Github Gist"><i class="fa fa-cloud-upload"></i><sub class="fa fa-github"></sub></span>`, () => {
-    if (lineup) {
-      saveToGist(lineup, document.title);
+    if (taggle) {
+      saveToGist(taggle, document.title);
     }
   });
   header.mainMenu.appendChild(document.getElementById('poolSelector'));
   header.rightMenu.insertBefore(document.getElementById('datasetSelector'), header.rightMenu.firstChild);
   header.addRightMenu(`<span title="Upload CSV/JSON"><i class="fa fa-upload"></i><sub><i class="fa fa-file-excel-o"></i><i class="fa fa-file-code-o"></i></sub></span>`, () => {
     importFile().then(({name, desc, data}) => {
-      lineup = initLineup(name, desc, data, lineup);
+      taggle = initTaggle(name, desc, data, taggle);
       header.ready();
     }).catch(() => {
       // aborted ok
@@ -125,7 +103,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
     const file = dataset.url;
     header.wait();
     dsv(desc.separator || '\t', 'text/plain')(file, (_data) => {
-      lineup = initLineup(dataset.name, desc, _data, lineup);
+      taggle = initTaggle(dataset.name, desc, _data, taggle);
       header.ready();
     });
   };
@@ -145,7 +123,7 @@ function initLineup(name: string, desc: any, _data: any[], lineup?: LineUp) {
   if (old.match(/gist:.*/)) {
     const gist = old.substr(5);
     loadGist(gist).then(({name, desc, data}) => {
-      lineup = initLineup(name, desc, data, lineup);
+      taggle = initTaggle(name, desc, data, taggle);
       header.ready();
     });
   } else {
