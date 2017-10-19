@@ -5,7 +5,7 @@
 import {create as createHeader, AppHeaderLink} from 'phovea_ui/src/header';
 
 import {createStackDesc, createNestedDesc, createScriptDesc} from 'lineupjs/src/model';
-import {deriveColors} from 'lineupjs/src';
+import {deriveColors} from 'lineupjs/src/utils';
 import {extent, dsv} from 'd3';
 import datasets, {IDataSetSpec} from './datasets';
 import {load as loadGist, save as saveToGist} from './gist';
