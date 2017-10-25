@@ -6,7 +6,7 @@
 import {columns as rawColumns} from './AIDS_Countries.json';
 import {columns as matrixColumns} from './AIDS_matrices.json';
 import {csv, text} from 'd3';
-import {IStratification} from 'taggle/src/v2/splicer';
+import {IStratification} from '../../taggle/splicer';
 
 import * as csvCountries from 'file-loader!./AIDS_Countries.csv';
 import * as csvLivingHIV from 'file-loader!./AIDS_living_HIV.csv';
