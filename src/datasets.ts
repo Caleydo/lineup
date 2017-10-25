@@ -8,7 +8,7 @@ import * as dataWUR from 'file-loader!./data/wur2013.txt';
 import * as descWUR from './data/data.json';
 import * as descWURSmall from './data/data_small.json';
 import * as aids from './data/aids';
-import {IStratification} from 'taggle/src/v2/splicer';
+import {IStratification} from './taggle/splicer';
 
 export interface IDataSetSpec {
   id: string;
