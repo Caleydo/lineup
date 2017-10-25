@@ -13,8 +13,7 @@ import exportToCSV, {exportToJSON} from './export';
 import importFile from './importer';
 import Taggle from 'lineupjs/src/taggle';
 import {LocalDataProvider} from 'lineupjs/src/provider';
-import {IStratification} from './taggle/splicer';
-import {matrixSplicer} from 'taggle/src/v2/splicer';
+import {IStratification, matrixSplicer} from './taggle/splicer';
 
 interface IDataSet {
   name: string;
