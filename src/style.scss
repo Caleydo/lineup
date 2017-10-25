@@ -42,3 +42,10 @@ form {
 }
 
 @import '~lineupjs/src/styles/taggle';
+
+.lu-side-panel .lu-summary[data-summary=stratify] {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 20px;
+}

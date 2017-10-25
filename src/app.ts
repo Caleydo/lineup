@@ -51,7 +51,6 @@ function initTaggle(name: string, desc: any, _data: any[], stratifications: IStr
     provider.restore(desc);
     taggle = new Taggle(document.getElementById('app'), provider, {
       header: {
-        summary: true,
         summaries: {
           'numbers': matrixSplicer(stratifications)
         }
