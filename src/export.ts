@@ -3,8 +3,8 @@
  */
 
 import {saveAs} from 'file-saver';
-import Taggle from 'taggle/src/v2/Taggle';
 import ADataProvider from 'lineupjs/src/provider/ADataProvider';
+import {ILineUpLike} from 'lineupjs/src/interfaces';
 
 export default function exportToCSV(data: ADataProvider, name: string) {
   const first = data.getRankings()[0];
@@ -15,17 +15,17 @@ export default function exportToCSV(data: ADataProvider, name: string) {
   });
 }
 
-function dumpLayout(taggle: Taggle) {
+function dumpLayout(lineup: ILineUpLike) {
   //full spec
-  const s = taggle.dump();
-  s.columns = (<any>taggle.data).columns;
-  s.data = (<any>taggle.data).data;
+  const s = lineup.dump();
+  s.columns = (<any>lineup.data).columns;
+  s.data = (<any>lineup.data).data;
   //stringify with pretty print
   return JSON.stringify(s, null, '\t');
 }
 
-export function exportToJSON(taggle: Taggle, name: string) {
-  const str = dumpLayout(taggle);
+export function exportToJSON(lineup: ILineUpLike, name: string) {
+  const str = dumpLayout(lineup);
   const blob = new Blob([str], {type: 'application/json;charset=utf-8'});
   saveAs(blob, name + '.json');
 }

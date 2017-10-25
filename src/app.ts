@@ -11,9 +11,10 @@ import datasets, {IDataSetSpec} from './datasets';
 import {load as loadGist, save as saveToGist} from './gist';
 import exportToCSV, {exportToJSON} from './export';
 import importFile from './importer';
-import Taggle from 'taggle/src/v2/Taggle';
+import Taggle from 'lineupjs/src/taggle';
 import {LocalDataProvider} from 'lineupjs/src/provider';
-import {IStratification} from 'taggle/src/v2/splicer';
+import {IStratification} from './taggle/splicer';
+import {matrixSplicer} from 'taggle/src/v2/splicer';
 
 interface IDataSet {
   name: string;
@@ -50,7 +51,12 @@ function initTaggle(name: string, desc: any, _data: any[], stratifications: IStr
   } else {
     provider.restore(desc);
     taggle = new Taggle(document.getElementById('app'), provider, {
-      stratifications
+      header: {
+        summary: true,
+        summaries: {
+          'numbers': matrixSplicer(stratifications)
+        }
+      }
     });
   }
   provider.deriveDefault();

@@ -3,7 +3,7 @@
  */
 
 import {json} from 'd3';
-import Taggle from 'taggle/src/v2/Taggle';
+import {ILineUpLike} from 'lineupjs/src/interfaces';
 
 export function load(gistid: string) {
   return new Promise((resolve, reject) => {
@@ -28,19 +28,19 @@ export function load(gistid: string) {
   });
 }
 
-function dumpLayout(taggle: Taggle) {
+function dumpLayout(lineup: ILineUpLike) {
   //full spec
-  const s = taggle.dump();
-  s.columns = (<any>taggle.data).columns;
-  s.data = (<any>taggle.data).data;
+  const s = lineup.dump();
+  s.columns = (<any>lineup.data).columns;
+  s.data = (<any>lineup.data).data;
 
   //stringify with pretty print
   return JSON.stringify(s, null, '\t');
 }
 
-export function save(taggle: Taggle, name: string) {
+export function save(lineup: ILineUpLike, name: string) {
   //stringify with pretty print
-  const str = dumpLayout(taggle);
+  const str = dumpLayout(lineup);
   const args = {
     'description': name,
     'public': true,
