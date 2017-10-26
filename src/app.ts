@@ -44,7 +44,10 @@ function initTaggle(name: string, desc: any, _data: any[], stratifications: IStr
   document.querySelector('[data-header="appLink"]').innerHTML = 'Taggle - '+name;
   document.title = 'Taggle - ' + name;
   fixMissing(desc.columns, _data);
-  const provider = new LocalDataProvider(_data, deriveColors(desc.columns));
+  const provider = new LocalDataProvider(_data, deriveColors(desc.columns), {
+    maxNestedSortingCriteria: Infinity,
+    maxGroupColumns: Infinity
+  });
   if (taggle) {
     taggle.changeDataStorage(provider, desc);
   } else {
