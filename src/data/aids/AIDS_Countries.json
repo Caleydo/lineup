@@ -2,7 +2,8 @@
   "columns": [
     {
       "column": "AIDS_Countries",
-      "type": "string"
+      "type": "string",
+      "frozen": true
     },
     {
       "column": "Sex before 15 (15-24, %, 2015)",
