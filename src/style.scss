@@ -45,6 +45,12 @@ form {
 $lu_assets: '~lineupjs/src/assets';
 @import '~lineupjs/src/styles/taggle';
 
+.lineup-engine > header section.lu-header .lu-summary[data-summary=stratify] {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
 .lu-side-panel .lu-summary[data-summary=stratify] {
   display: flex;
   align-items: center;

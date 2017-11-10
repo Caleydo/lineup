@@ -43,13 +43,16 @@ function clean(v: string) {
 
 export const desc = (() => {
   const desc = rawColumns;
+
+  const years = csv.parse(csvYears).map((d) => d.AIDS_Years); // first column
   matrixColumns.forEach((m) => {
     desc.push({
       type: 'numbers',
       domain: m.value.range,
       column: m.name,
       dataLength: m.size[1],
-      colorRange: ['white', 'black']
+      colorRange: ['white', 'black'],
+      labels: years
     });
   });
   desc.forEach((d) => {

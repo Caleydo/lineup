@@ -23,9 +23,13 @@ export interface IStratification {
  */
 export function matrixSplicer(categories: IStratification[]): ISummaryFunction {
   return (col: NumbersColumn, node: HTMLElement, interactive: boolean, ctx: IRankingHeaderContext) => {
-    node.dataset.summary='stratify';
+    node.dataset.summary = 'stratify';
     if (!interactive) {
-      node.innerHTML = '';
+      const labels = (<any>col.desc).labels;
+      if (!labels) {
+        node.innerHTML = '';
+      }
+      node.innerHTML = `<span>${labels[0]}</span><span>${labels[labels.length - 1]}</span>`;
       return;
     }
     node.innerHTML = `<select>
@@ -37,7 +41,7 @@ export function matrixSplicer(categories: IStratification[]): ISummaryFunction {
       evt.preventDefault();
       evt.stopPropagation();
 
-      const selected = categories[select.selectedIndex -1]; // empty option
+      const selected = categories[select.selectedIndex - 1]; // empty option
       if (!selected) {
         return;
       }
