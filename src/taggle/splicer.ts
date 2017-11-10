@@ -41,7 +41,7 @@ export function matrixSplicer(categories: IStratification[]): ISummaryFunction {
       if (!selected) {
         return;
       }
-      const base = <NestedColumn>ctx.provider.create(createNestedDesc(selected.name));
+      const base = <NestedColumn>ctx.provider.create(createNestedDesc(`${col.getMetaData().label} by ${selected.name}`));
       const w = col.getWidth();
       selected.categories.forEach((group) => {
         const g = typeof group === 'string' ? {name: group, label: group} : group;
