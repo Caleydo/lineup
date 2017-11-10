@@ -97,7 +97,6 @@ function initTaggle(name: string, desc: any, _data: any[], stratifications: IStr
       saveToGist(taggle, document.title);
     }
   });
-  header.mainMenu.appendChild(document.getElementById('poolSelector'));
   header.rightMenu.insertBefore(document.getElementById('datasetSelector'), header.rightMenu.firstChild);
   header.addRightMenu(`<span title="Upload CSV/JSON"><i class="fa fa-upload"></i><sub><i class="fa fa-file-excel-o"></i><i class="fa fa-file-code-o"></i></sub></span>`, () => {
     importFile().then(({name, desc, data}) => {
