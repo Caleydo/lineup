@@ -41,7 +41,7 @@ function fixMissing(columns, data) {
 
 
 function initTaggle(name: string, desc: any, _data: any[], stratifications: IStratification[], taggle?: Taggle) {
-  document.querySelector('[data-header="appLink"]').innerHTML = 'Taggle - '+name;
+  document.querySelector('[data-header="appLink"]').innerHTML = 'Taggle &mdash; '+name;
   document.title = 'Taggle - ' + name;
   fixMissing(desc.columns, _data);
   const provider = new LocalDataProvider(_data, deriveColors(desc.columns), {
