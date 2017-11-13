@@ -33,7 +33,7 @@ export function matrixSplicer(categories: IStratification[]): ISummaryFunction {
       return;
     }
     node.innerHTML = `<select>
-        <option value="">Stratify By...</option>
+        <option value="">Stratify by...</option>
         ${categories.map((d) => `<option value="${d.name}">${d.name}</option>`).join('')}
     </select>`;
     const select = <HTMLSelectElement>node.firstElementChild!;
