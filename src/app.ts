@@ -4,7 +4,6 @@
 
 import {create as createHeader, AppHeaderLink} from 'phovea_ui/src/header';
 
-import {createStackDesc, createNestedDesc, createScriptDesc} from 'lineupjs/src/model';
 import {deriveColors} from 'lineupjs/src/utils';
 import {extent, dsv} from 'd3';
 import datasets, {IDataSetSpec} from './datasets';
@@ -46,7 +45,8 @@ function initTaggle(name: string, desc: any, _data: any[], stratifications: IStr
   fixMissing(desc.columns, _data);
   const provider = new LocalDataProvider(_data, deriveColors(desc.columns), {
     maxNestedSortingCriteria: Infinity,
-    maxGroupColumns: Infinity
+    maxGroupColumns: Infinity,
+    filterGlobally: true
   });
   if (taggle) {
     taggle.changeDataStorage(provider, desc);
