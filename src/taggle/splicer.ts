@@ -24,8 +24,10 @@ export interface IStratification {
 export function matrixSplicer(categories: IStratification[]): ISummaryFunction {
   return (col: NumbersColumn, node: HTMLElement, interactive: boolean, ctx: IRankingHeaderContext) => {
     node.dataset.summary = 'stratify';
+    const allLabels = (<any>col.desc).labels || [];
     if (!interactive) {
-      const labels = (<any>col.desc).labels;
+      // our custom splice also provides labels
+      const labels = (<any>col.getSplicer()).labels || allLabels;
       if (!labels) {
         node.innerHTML = '';
       }
@@ -54,9 +56,10 @@ export function matrixSplicer(categories: IStratification[]): ISummaryFunction {
         gcol.setMetaData({label: g.label || g.name, color: g.color || Column.DEFAULT_COLOR, description: ''});
 
         const length = selected.data.reduce((a, s) => a + (s === g.name ? 1 : 0), 0);
-        gcol.setSplicer({
+        gcol.setSplicer(<any>{
           length,
-          splice: (vs) => vs.filter((_v, i) => selected.data[i] === g.name)
+          splice: (vs) => vs.filter((_v, i) => selected.data[i] === g.name),
+          labels: allLabels.filter((_v, i) => selected.data[i] === g.name)
         });
         gcol.setWidth(w * length / selected.data.length);
 
