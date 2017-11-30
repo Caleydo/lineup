@@ -75,6 +75,10 @@ export const desc = (() => {
         type: 'aggregate'
       },
       {
+        type: 'group',
+        width: 150
+      },
+      {
         type: 'rank'
       },
       {
