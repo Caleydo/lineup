@@ -2,7 +2,7 @@ import {ISummaryFunction} from 'lineupjs/src/ui/interfaces';
 import {IRankingHeaderContext} from 'lineupjs/src/ui/engine/interfaces';
 import NumbersColumn from 'lineupjs/src/model/NumbersColumn';
 import {createNestedDesc} from 'lineupjs/src/model';
-import {ICategory} from 'lineupjs/src/model/CategoricalColumn';
+import {ICategory} from 'lineupjs/src/model/ICategoricalColumn';
 import Column from 'lineupjs/src/model/Column';
 import NestedColumn from 'lineupjs/src/model/NestedColumn';
 
