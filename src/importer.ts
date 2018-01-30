@@ -10,7 +10,27 @@ import {createValueTypeEditors} from 'phovea_importer/src/valuetypes';
 import {importTable} from 'phovea_importer/src/importtable';
 
 
-function deriveColumns(columns: any[]) {
+interface IImportedData {
+  name: string;
+
+  desc: {
+    columns: IColumnDesc[]
+  };
+
+  data: any;
+}
+
+interface IColumnDesc {
+  type: string;
+  column: string;
+  label: string;
+  color?: string;
+  cssClass?: string;
+  categories?: string[];
+  domain?: number[];
+}
+
+function deriveColumns(columns: any[]):IColumnDesc[] {
   return columns.map((col) => {
     const r: any = {
       column: col.column,
@@ -51,7 +71,7 @@ function deriveColumns(columns: any[]) {
 }
 
 
-function convertLoaded(r) {
+function convertLoaded(r):IImportedData {
   if (r == null || r.desc.type !== 'table') {
     return;
   }
@@ -65,7 +85,7 @@ function convertLoaded(r) {
   return {name, desc, data: r.data};
 }
 
-function loadJSON(file: File, name: string) {
+function loadJSON(file: File, name: string):Promise<IImportedData> {
   return new Promise((resolve) => {
     const f = new FileReader();
     f.addEventListener('load', (event) => {
@@ -79,43 +99,49 @@ function loadJSON(file: File, name: string) {
 function createImporter(parent: Element) {
   const $parent = d3.select(parent).append('div').classed('caleydo-importer', true);
 
-  let buildCSV = null;
-  let jsonDesc = null;
+  let data:Promise<IImportedData>;
+
   const selectedFile = (file: File) => {
     let name = file.name;
     const extension = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
     name = name.substring(0, name.lastIndexOf('.')); //remove .csv
 
     if (extension === 'json') {
-      loadJSON(file, name).then((r) => {
-        jsonDesc = r;
-        $parent.html('Loaded!');
-      });
-    } else { // assume some kind of csv
-      Promise.all([<any>parseCSV(file), createValueTypeEditors()]).then((results) => {
-        const editors = results[1];
-        const data = results[0].data;
-        const header = data.shift();
+      data = loadJSON(file, name)
+        .then((r) => {
+          $parent.html('Loaded!');
+          return r;
+        });
 
-        buildCSV = importTable(editors, $parent, header, data, name);
-      });
+    } else { // assume some kind of csv
+      data = Promise.all([<any>parseCSV(file), createValueTypeEditors()])
+        .then((results) => {
+          const editors = results[1];
+          const data = results[0].data;
+          const header = data.shift();
+
+          return importTable(editors, $parent, header, data, name);
+        })
+        .then((csvTable) => {
+          return convertLoaded(csvTable());
+        });
     }
   };
 
   $parent.html(`
-      <div class="drop-zone">
-        <input type="file" id="importer-file" />
-      </div>
-    `);
+    <div class="drop-zone">
+      <input type="file" id="importer-file" />
+    </div>
+  `);
 
   selectFileLogic($parent.select('div.drop-zone'), $parent.select('input[type=file]'), selectedFile);
 
   return {
-    getResult: () => buildCSV ? convertLoaded(buildCSV()) : jsonDesc
+    getResult: () => data
   };
 }
 
-export default function importFile() {
+export default function importFile():Promise<IImportedData> {
   return new Promise((resolve, reject) => {
     const dialog = generateDialog('Import CSV/JSON', 'Import CSV/JSON');
     const importer = createImporter(dialog.body);
