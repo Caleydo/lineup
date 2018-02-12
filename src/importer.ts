@@ -8,6 +8,7 @@ import {parseCSV} from 'phovea_importer/src/parser';
 import * as d3 from 'd3';
 import {createValueTypeEditors} from 'phovea_importer/src/valuetypes';
 import {importTable} from 'phovea_importer/src/importtable';
+import {initTaggle} from './app';
 
 
 interface IImportedData {
@@ -160,5 +161,33 @@ export default function importFile():Promise<IImportedData> {
       }
     });
     dialog.show();
+  });
+}
+
+export function initImporter(){
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.hidden = true;
+  fileInput.className = "hidden";
+  document.body.appendChild(fileInput);
+
+  selectFileLogic(d3.select('#app'), d3.select(fileInput), (file: File) => {
+
+    let name = file.name;
+    name = name.substring(0, name.lastIndexOf('.')); //remove .csv
+
+    Promise.all([<any>parseCSV(file), createValueTypeEditors()])
+      .then((results) => {
+        const editors = results[1];
+        const data = results[0].data;
+        const header = data.shift();
+
+        return importTable(editors, d3.select(document.createElement("div")), header, data, name);
+      })
+      .then((csvTable) => {
+        return convertLoaded(csvTable());
+      }).then(({name, desc, data}) => {
+        initTaggle(name, desc, data, []);
+      });
   });
 }
