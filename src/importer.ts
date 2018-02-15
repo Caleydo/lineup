@@ -164,11 +164,11 @@ export default function importFile():Promise<IImportedData> {
   });
 }
 
-export function initImporter(){
-  const fileInput = document.createElement("input");
-  fileInput.type = "file";
+export function initImporter() {
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file';
   fileInput.hidden = true;
-  fileInput.className = "hidden";
+  fileInput.className = 'hidden';
   document.body.appendChild(fileInput);
 
   selectFileLogic(d3.select('#app'), d3.select(fileInput), (file: File) => {
@@ -182,7 +182,7 @@ export function initImporter(){
         const data = results[0].data;
         const header = data.shift();
 
-        return importTable(editors, d3.select(document.createElement("div")), header, data, name);
+        return importTable(editors, d3.select(document.createElement('div')), header, data, name);
       })
       .then((csvTable) => {
         return convertLoaded(csvTable());
