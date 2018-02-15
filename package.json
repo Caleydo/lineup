@@ -1,6 +1,6 @@
 {
   "name": "lineup",
-  "description": "LineUp is a Phovea application based on LineUp.js to explore multi-attribute rankings",
+  "description": "Seamlessly fuse the data import with the data analysis in Taggle.",
   "homepage": "https://phovea.caleydo.org",
   "version": "1.0.0-SNAPSHOT",
   "private": true,
