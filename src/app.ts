@@ -10,7 +10,7 @@ import datasets, {IDataSetSpec} from './datasets';
 import {load as loadGist, save as saveToGist} from './gist';
 import exportToCSV, {exportToJSON} from './export';
 import importFile from './importer';
-import {initImporter} from './importer'
+import {initImporter} from './importer';
 import Taggle from 'lineupjs/src/ui/taggle';
 import {LocalDataProvider} from 'lineupjs/src/provider';
 import {IStratification, matrixSplicer} from './taggle/splicer';
