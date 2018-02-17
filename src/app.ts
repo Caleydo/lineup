@@ -76,12 +76,12 @@ export function initTaggle(name: string, desc: any, _data: any[], stratification
   return taggle;
 }
 
+export let taggle: Taggle = null;
 {
   const header = createHeader(
     <HTMLElement>document.querySelector('#caleydoHeader'),
     {appLink: new AppHeaderLink('LineUp')}
   );
-  let taggle: Taggle = null;
 
   header.addRightMenu(`<span title="Download CSV"><i class="fa fa-download"></i><sub class="fa fa-file-excel-o"></sub></span>`, () => {
     if (taggle) {

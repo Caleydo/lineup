@@ -9,6 +9,7 @@ import * as d3 from 'd3';
 import {createValueTypeEditors} from 'phovea_importer/src/valuetypes';
 import {importTable} from 'phovea_importer/src/importtable';
 import {initTaggle} from './app';
+import {taggle} from './app';
 
 
 interface IImportedData {
@@ -187,7 +188,7 @@ export function initImporter() {
       .then((csvTable) => {
         return convertLoaded(csvTable());
       }).then(({name, desc, data}) => {
-        initTaggle(name, desc, data, []);
+        initTaggle(name, desc, data, [], taggle);
       });
   });
 }
