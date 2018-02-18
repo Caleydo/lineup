@@ -175,7 +175,7 @@ export function initImporter() {
   selectFileLogic(d3.select('#app'), d3.select(fileInput), (file: File) => {
 
     let name = file.name;
-    if(name.substring(name.lastIndexOf('.') + 1).toLowerCase() == 'csv') {
+    if (name.substring(name.lastIndexOf('.') + 1).toLowerCase() === 'csv') {
       name = name.substring(0, name.lastIndexOf('.')); //remove .csv
 
       Promise.all([<any>parseCSV(file), createValueTypeEditors()])
@@ -191,10 +191,10 @@ export function initImporter() {
         }).then(({name, desc, data}) => {
         initTaggle(name, desc, data, [], taggle);
       });
-    }else{
+    } else {
       //file extension not supported
       const dialog = generateDialog('Invalid file', 'Close');
-      dialog.body.innerText = "The provided file is not supported!";
+      dialog.body.innerText = 'The provided file is not supported!';
       dialog.onSubmit(() => {
         dialog.hide();
       });
