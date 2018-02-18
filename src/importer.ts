@@ -30,9 +30,10 @@ interface IColumnDesc {
   cssClass?: string;
   categories?: string[];
   domain?: number[];
+  guessed?: boolean;
 }
 
-function deriveColumns(columns: any[]):IColumnDesc[] {
+function deriveColumns(columns: any[], guessed: boolean = false):IColumnDesc[] {
   return columns.map((col) => {
     const r: any = {
       column: col.column,
@@ -68,16 +69,18 @@ function deriveColumns(columns: any[]):IColumnDesc[] {
         r.type = 'string';
         break;
     }
+    r.guessed = guessed;
+
     return r;
   });
 }
 
 
-function convertLoaded(r):IImportedData {
+function convertLoaded(r, guessed: boolean = false):IImportedData {
   if (r == null || r.desc.type !== 'table') {
     return;
   }
-  const columns = deriveColumns((<any>r.desc).columns);
+  const columns = deriveColumns((<any>r.desc).columns, true);
   if ((<any>r.desc).idcolumn !== '_index') {
     columns.unshift({type: 'string', label: 'Row', column: (<any>r.desc).idcolumn});
   }
@@ -186,7 +189,7 @@ export function initImporter() {
         return importTable(editors, d3.select(document.createElement('div')), header, data, name);
       })
       .then((csvTable) => {
-        return convertLoaded(csvTable());
+        return convertLoaded(csvTable(), true);
       }).then(({name, desc, data}) => {
         initTaggle(name, desc, data, [], taggle);
       });
