@@ -175,20 +175,33 @@ export function initImporter() {
   selectFileLogic(d3.select('#app'), d3.select(fileInput), (file: File) => {
 
     let name = file.name;
-    name = name.substring(0, name.lastIndexOf('.')); //remove .csv
+    if(name.substring(name.lastIndexOf('.') + 1).toLowerCase() == 'csv') {
+      name = name.substring(0, name.lastIndexOf('.')); //remove .csv
 
-    Promise.all([<any>parseCSV(file), createValueTypeEditors()])
-      .then((results) => {
-        const editors = results[1];
-        const data = results[0].data;
-        const header = data.shift();
+      Promise.all([<any>parseCSV(file), createValueTypeEditors()])
+        .then((results) => {
+          const editors = results[1];
+          const data = results[0].data;
+          const header = data.shift();
 
-        return importTable(editors, d3.select(document.createElement('div')), header, data, name);
-      })
-      .then((csvTable) => {
-        return convertLoaded(csvTable());
-      }).then(({name, desc, data}) => {
+          return importTable(editors, d3.select(document.createElement('div')), header, data, name);
+        })
+        .then((csvTable) => {
+          return convertLoaded(csvTable());
+        }).then(({name, desc, data}) => {
         initTaggle(name, desc, data, [], taggle);
       });
+    }else{
+      //file extension not supported
+      const dialog = generateDialog('Invalid file', 'Close');
+      dialog.body.innerText = "The provided file is not supported!";
+      dialog.onSubmit(() => {
+        dialog.hide();
+      });
+      dialog.onHide(() => {
+        dialog.destroy();
+      });
+      dialog.show();
+    }
   });
 }
