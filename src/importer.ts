@@ -175,20 +175,46 @@ export function initImporter() {
   selectFileLogic(d3.select('#app'), d3.select(fileInput), (file: File) => {
 
     let name = file.name;
-    name = name.substring(0, name.lastIndexOf('.')); //remove .csv
+    const fileExtension = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
 
-    Promise.all([<any>parseCSV(file), createValueTypeEditors()])
-      .then((results) => {
-        const editors = results[1];
-        const data = results[0].data;
-        const header = data.shift();
+    if (fileExtension === 'csv') {
+      name = name.substring(0, name.lastIndexOf('.')); //remove .csv
 
-        return importTable(editors, d3.select(document.createElement('div')), header, data, name);
-      })
-      .then((csvTable) => {
-        return convertLoaded(csvTable());
-      }).then(({name, desc, data}) => {
-        initTaggle(name, desc, data, [], taggle);
+      Promise.all([<any>parseCSV(file), createValueTypeEditors()])
+        .then((results) => {
+          const editors = results[1];
+          const data = results[0].data;
+          const header = data.shift();
+
+          return importTable(editors, d3.select(document.createElement('div')), header, data, name);
+        })
+        .then((csvTable) => {
+          return convertLoaded(csvTable());
+        })
+        .then(({name, desc, data}) => {
+          initTaggle(name, desc, data, [], taggle);
+        });
+
+    } else {
+
+      let title = 'Invalid file type';
+      let text = 'The provided file type is not supported! Please try a CSV file instead.';
+
+      if(fileExtension === 'json') {
+        title = `No support for drag-and-drop import`;
+        text = `Please use the JSON import dialog (from the header) to import JSON files.`;
+      }
+
+      //file extension not supported
+      const dialog = generateDialog(title, 'Close');
+      dialog.body.innerText = text;
+      dialog.onSubmit(() => {
+        dialog.hide();
       });
+      dialog.onHide(() => {
+        dialog.destroy();
+      });
+      dialog.show();
+    }
   });
 }
