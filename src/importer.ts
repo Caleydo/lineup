@@ -10,7 +10,7 @@ import {createValueTypeEditors} from 'phovea_importer/src/valuetypes';
 import {importTable} from 'phovea_importer/src/importtable';
 import {initTaggle} from './app';
 import {taggle} from './app';
-import {EGuessedState} from '../../lineupjs/src/model/Column';
+import {EGuessedState} from 'lineupjs/src/model/Column';
 
 
 interface IImportedData {
