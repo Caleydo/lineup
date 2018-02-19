@@ -175,7 +175,9 @@ export function initImporter() {
   selectFileLogic(d3.select('#app'), d3.select(fileInput), (file: File) => {
 
     let name = file.name;
-    if (name.substring(name.lastIndexOf('.') + 1).toLowerCase() === 'csv') {
+    const fileExtension = name.substring(name.lastIndexOf('.') + 1).toLowerCase();
+
+    if (fileExtension === 'csv') {
       name = name.substring(0, name.lastIndexOf('.')); //remove .csv
 
       Promise.all([<any>parseCSV(file), createValueTypeEditors()])
@@ -191,10 +193,20 @@ export function initImporter() {
         }).then(({name, desc, data}) => {
         initTaggle(name, desc, data, [], taggle);
       });
+
     } else {
+
+      let title = 'Invalid file type';
+      let text = 'The provided file type is not supported! Please try a CSV file instead.';
+
+      if(fileExtension === 'json') {
+        title = `No support for drag-and-drop import`;
+        text = `Please use the JSON import dialog (from the header) to import JSON files.`;
+      }
+
       //file extension not supported
-      const dialog = generateDialog('Invalid file', 'Close');
-      dialog.body.innerText = 'The provided file is not supported!';
+      const dialog = generateDialog(title, 'Close');
+      dialog.body.innerText = text;
       dialog.onSubmit(() => {
         dialog.hide();
       });
