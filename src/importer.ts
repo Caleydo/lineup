@@ -190,9 +190,10 @@ export function initImporter() {
         })
         .then((csvTable) => {
           return convertLoaded(csvTable());
-        }).then(({name, desc, data}) => {
-        initTaggle(name, desc, data, [], taggle);
-      });
+        })
+        .then(({name, desc, data}) => {
+          initTaggle(name, desc, data, [], taggle);
+        });
 
     } else {
 
