@@ -1,7 +1,8 @@
 {
   "name": "lineup",
-  "description": "Seamlessly fuse the data import with the data analysis in Taggle.",
-  "homepage": "https://phovea.caleydo.org",
+  "displayName": "Taggle",
+  "description": "Taggle is a scalable visualization technique for exploring, ranking, and aggregating tabular data.",
+  "homepage": "http://caleydo.org/tools/taggle",
   "version": "1.0.0-SNAPSHOT",
   "private": true,
   "author": {
@@ -85,12 +86,17 @@
     "sass-loader": "5.0.0",
     "style-loader": "0.13.1",
     "tslint": "4.4.2",
-    "typedoc": "0.5.5",
+    "typedoc": "0.7.2",
     "typescript": "2.2.0",
     "url-loader": "0.5.7",
     "webpack": "2.2.1",
-    "webpack-dev-server": "2.3.0",
+    "webpack-dev-server": "2.4.2",
     "extract-loader": "0.1.0",
-    "tslib": "1.5.0"
+    "tslib": "1.5.0",
+    "ifdef-loader": "2.0.0",
+    "cache-loader": "1.2.0",
+    "fork-ts-checker-webpack-plugin": "0.2.9",
+    "thread-loader": "1.1.2",
+    "ts-loader": "3.1.1"
   }
 }
