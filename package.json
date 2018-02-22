@@ -1,7 +1,7 @@
 {
   "name": "lineup",
-  "displayName": "Taggle",
-  "description": "Taggle is a scalable visualization technique for exploring, ranking, and aggregating tabular data.",
+  "displayName": "Taggle Fusion",
+  "description": "Seamlessly fuse the data import with the data analysis in Taggle.",
   "homepage": "http://caleydo.org/tools/taggle",
   "version": "1.0.0-SNAPSHOT",
   "private": true,
