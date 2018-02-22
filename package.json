@@ -1,7 +1,7 @@
 {
   "name": "lineup",
-  "description": "LineUp is a Phovea application based on LineUp.js to explore multi-attribute rankings",
-  "homepage": "https://phovea.caleydo.org",
+  "description": "Taggle is a scalable visualization technique for exploring, ranking, and aggregating tabular data.",
+  "homepage": "http://caleydo.org/tools/taggle",
   "version": "1.0.0-SNAPSHOT",
   "private": true,
   "author": {
