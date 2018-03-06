@@ -57,7 +57,7 @@
     "@types/file-saver": "0.0.0",
     "d3": "3.5.17",
     "file-saver": "1.3.3",
-    "lineupjs": "github:Caleydo/lineupjs#taggle-fusion-issue-25",
+    "lineupjs": "github:Caleydo/lineupjs#taggle-fusion",
     "phovea_ui": "github:phovea/phovea_ui#develop",
     "phovea_core": "github:phovea/phovea_core#develop",
     "phovea_importer": "github:phovea/phovea_importer#taggle-fusion"
