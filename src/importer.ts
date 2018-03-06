@@ -10,6 +10,7 @@ import {createValueTypeEditors} from 'phovea_importer/src/valuetypes';
 import {importTable} from 'phovea_importer/src/importtable';
 import {initTaggle} from './app';
 import {taggle} from './app';
+import {EGuessedState} from 'lineupjs/src/model/Column';
 
 
 interface IImportedData {
@@ -30,9 +31,10 @@ interface IColumnDesc {
   cssClass?: string;
   categories?: string[];
   domain?: number[];
+  guessed?: EGuessedState;
 }
 
-function deriveColumns(columns: any[]):IColumnDesc[] {
+function deriveColumns(columns: any[], guessed: EGuessedState = EGuessedState.CHECKED):IColumnDesc[] {
   return columns.map((col) => {
     const r: any = {
       column: col.column,
@@ -68,16 +70,18 @@ function deriveColumns(columns: any[]):IColumnDesc[] {
         r.type = 'string';
         break;
     }
+    r.guessed = guessed;
+
     return r;
   });
 }
 
 
-function convertLoaded(r):IImportedData {
+function convertLoaded(r, guessed: EGuessedState = EGuessedState.CHECKED):IImportedData {
   if (r == null || r.desc.type !== 'table') {
     return;
   }
-  const columns = deriveColumns((<any>r.desc).columns);
+  const columns = deriveColumns((<any>r.desc).columns, guessed);
   if ((<any>r.desc).idcolumn !== '_index') {
     columns.unshift({type: 'string', label: 'Row', column: (<any>r.desc).idcolumn});
   }
@@ -189,7 +193,7 @@ export function initImporter() {
           return importTable(editors, d3.select(document.createElement('div')), header, data, name);
         })
         .then((csvTable) => {
-          return convertLoaded(csvTable());
+          return convertLoaded(csvTable(), EGuessedState.GUESSED);
         })
         .then(({name, desc, data}) => {
           initTaggle(name, desc, data, [], taggle);
