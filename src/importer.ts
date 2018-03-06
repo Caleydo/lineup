@@ -34,7 +34,7 @@ interface IColumnDesc {
   guessed?: EGuessedState;
 }
 
-function deriveColumns(columns: any[], guessed: EGuessedState = EGuessedState.checked):IColumnDesc[] {
+function deriveColumns(columns: any[], guessed: EGuessedState = EGuessedState.CHECKED):IColumnDesc[] {
   return columns.map((col) => {
     const r: any = {
       column: col.column,
@@ -77,7 +77,7 @@ function deriveColumns(columns: any[], guessed: EGuessedState = EGuessedState.ch
 }
 
 
-function convertLoaded(r, guessed: EGuessedState = EGuessedState.checked):IImportedData {
+function convertLoaded(r, guessed: EGuessedState = EGuessedState.CHECKED):IImportedData {
   if (r == null || r.desc.type !== 'table') {
     return;
   }
@@ -193,7 +193,7 @@ export function initImporter() {
           return importTable(editors, d3.select(document.createElement('div')), header, data, name);
         })
         .then((csvTable) => {
-          return convertLoaded(csvTable(), EGuessedState.guessed);
+          return convertLoaded(csvTable(), EGuessedState.GUESSED);
         })
         .then(({name, desc, data}) => {
           initTaggle(name, desc, data, [], taggle);
