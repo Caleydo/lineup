@@ -130,6 +130,20 @@ function parseStratifications() {
   const data = csv.parse(csvSeasons);
 
   const descs = [ 
+    {
+        name: 'season',
+        value: {
+          categories: [
+            "12/13",
+            "13/14",
+            "14/15",
+            "15/16",
+            "16/17",
+            "17/18",
+          ]
+        }
+      }
+  
   ];
 
   return descs.map((d) => {
