@@ -8,6 +8,7 @@ import * as dataWUR from 'file-loader!./data/wur2013.txt';
 import * as descWUR from './data/data.json';
 import * as descWURSmall from './data/data_small.json';
 import * as aids from './data/aids';
+import * as soccer from './data/soccer';
 import {IStratification} from './taggle/splicer';
 
 export interface IDataSetSpec {
@@ -42,7 +43,14 @@ const data: IDataSetSpec[] = [
     name: 'SP500 2015-06-26',
     desc: descSP500,
     url: dataSP500
-  }
+  },
+  {
+    id: 'soccer',
+    name: 'Soccer',
+    desc: soccer.desc,
+    url: soccer.loader,
+    stratifications: soccer.stratifications
+   }
 ];
 
 export default data;

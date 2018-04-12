@@ -1,0 +1,86 @@
+{
+	"primaryKey": "soccerplayers",
+	"columns": [		
+		{
+			"column": "age",
+			"label": "Age",
+			"color": "gray",
+			"type": "number",
+			"domain": [
+				16,
+				38
+			]
+		},
+		{
+			"column": "current club",
+			"label": "Current club",
+			"color": "#DDDDDD",
+			"type": "categorical"
+		},
+		{
+			"column": "current league",
+			"label": "Current league",
+			"color": "#DDDDDD",
+			"type": "categorical",
+			"categories": [
+				"Eredivisie",
+				"Jupiler Pro League",
+				"LaLiga",
+				"Liga NOS",
+				"Ligue 1",
+				"Premier League",
+				"Premier Liga",
+				"Serie A",
+				"Super League",
+				"Süper Lig"
+			]
+		},
+		{
+			"column": "foot",
+			"label": "Foot",
+			"color": "#DDDDDD",
+			"type": "categorical",
+			"categories": [
+				"",
+				"both",
+				"left",
+				"right"
+			]
+		},
+		{
+			"column": "height",
+			"label": "Height",
+			"color": "gray",
+			"type": "number",
+			"domain": [
+				163,
+				204
+			]
+		},
+		{
+			"column": "soccerplayers",
+			"label": "Name",
+			"color": "#DDDDDD",
+			"type": "string",
+			"frozen": true
+		},
+		{
+			"column": "nationality",
+			"label": "Nationality",
+			"color": "#DDDDDD",
+			"type": "categorical"
+		},
+		{
+			"column": "position",
+			"label": "Position",
+			"color": "#DDDDDD",
+			"type": "categorical",
+			"categories": [
+				"CF",
+				"W"
+			]
+		}
+	],
+	 "quotechar": "\"",
+	 "separator": ","
+}

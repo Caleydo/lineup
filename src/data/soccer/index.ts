@@ -3,23 +3,17 @@
  */
 
 
-import {columns as rawColumns} from './AIDS_Countries.json';
-import {columns as matrixColumns} from './AIDS_matrices.json';
+import {columns as rawColumns} from './soccerplayers.json';
+import {columns as matrixColumns} from './soccermatrices.json';
 import {csv, text} from 'd3';
 import {IStratification} from '../../taggle/splicer';
 
-import * as csvCountries from 'file-loader!./AIDS_Countries.csv';
-import * as csvLivingHIV from 'file-loader!./AIDS_living_HIV.csv';
-import * as csvLivingHIVNormalized from 'file-loader!./AIDS_living_HIV_normalized.csv';
-import * as csvNewHIVInfections from 'file-loader!./AIDS_new_HIV_infections.csv';
-import * as csvNewHIVInfectionsNormalized from 'file-loader!./AIDS_new_HIV_infections_normalized.csv';
-import * as csvOnART from 'file-loader!./AIDS_on_ART.csv';
-import * as csvOnARTNormalized from 'file-loader!./AIDS_on_ART_normalized.csv';
-import * as csvOrphans from 'file-loader!./AIDS_orphans.csv';
-import * as csvOrphansNormalized from 'file-loader!./AIDS_orphans_normalized.csv';
-import * as csvRelatedDeaths from 'file-loader!./AIDS_related_deaths.csv';
-import * as csvRelatedDeathsNormalized from 'file-loader!./AIDS_related_deaths_normalized.csv';
-import * as csvYears from 'raw-loader!./AIDS_Years.csv';
+import * as csvPlayers from 'file-loader!./soccerplayers.csv';
+import * as csvMinutes from 'file-loader!./minutes.csv';
+import * as csvGoals from 'file-loader!./goals.csv';
+import * as csvAssists from 'file-loader!./assists.csv';
+import * as csvGames from 'file-loader!./games.csv';
+import * as csvSeasons from 'raw-loader!./soccerseasons.csv';
 
 function parseValue(v: string, col: any) {
   switch (col.type) {
@@ -44,7 +38,7 @@ function clean(v: string) {
 export const desc = (() => {
   const desc = rawColumns;
 
-  const years = csv.parse(csvYears).map((d) => d.AIDS_Years); // first column
+  const seasons = csv.parse(csvSeasons).map((d) => d.season); // first column
   matrixColumns.forEach((m) => {
     desc.push({
       type: 'numbers',
@@ -52,21 +46,23 @@ export const desc = (() => {
       column: m.name,
       dataLength: m.size[1],
       colorRange: ['white', 'black'],
-      labels: years
+      labels: seasons
     });
   });
   desc.forEach((d) => {
     d.label = d.column;
     d.column = clean(d.column);
   });
-  const defaultColumns = ['AIDS_Countries',
-        'Continent',
-        'Human devel. index',
-        'Ppl knowing they have HIV (%, 2015)',
-        'N. new HIV infections per 1000 ppl', // matrix
-        'AIDS related deaths per 1000 ppl', // matrix
-        'Discriminatory attitude scale',
-        'Urban Pop (%)'];
+  const defaultColumns = ['soccerplayers',
+        'age',
+        'height',
+        'foot',
+        'games',
+        'goals',
+        'minutes',
+        'assists',
+        'current league',
+        'current club'];
   return {
     columns: desc,
     layout: {
@@ -93,7 +89,7 @@ export const desc = (() => {
 export function loader() {
   return new Promise<any[]>((resolve) => {
 
-    const data = csv(csvCountries, (rawRow) => {
+    const data = csv(csvPlayers, (rawRow) => {
       const r: any = {};
       rawColumns.forEach((col: any) => {
         const v = rawRow[col.label];
@@ -114,17 +110,11 @@ export function loader() {
         });
       });
      }
-    return Promise.all([
-      integrateMatrix(matrixColumns[0], csvLivingHIV),
-      integrateMatrix(matrixColumns[1], csvLivingHIVNormalized),
-      integrateMatrix(matrixColumns[2], csvNewHIVInfections),
-      integrateMatrix(matrixColumns[3], csvNewHIVInfectionsNormalized),
-      integrateMatrix(matrixColumns[4], csvRelatedDeaths),
-      integrateMatrix(matrixColumns[5], csvRelatedDeathsNormalized),
-      integrateMatrix(matrixColumns[6], csvOnART),
-      integrateMatrix(matrixColumns[7], csvOnARTNormalized),
-      integrateMatrix(matrixColumns[8], csvOrphans),
-      integrateMatrix(matrixColumns[9], csvOrphansNormalized)
+    return Promise.all([      
+      integrateMatrix(matrixColumns[0], csvAssists),
+      integrateMatrix(matrixColumns[1], csvGames),
+      integrateMatrix(matrixColumns[2], csvGoals),
+      integrateMatrix(matrixColumns[3], csvMinutes),
     ]).then(() => {
       return data;
     });
@@ -137,47 +127,9 @@ export const defaultColumns: string[] = [
 
 
 function parseStratifications() {
-  const data = csv.parse(csvYears);
+  const data = csv.parse(csvSeasons);
 
-  const descs = [
-    {
-        name: 'Decades',
-        value: {
-          categories: [
-            {
-              color: '#d7b5d8',
-              name: '1990s'
-            },
-            {
-              color: '#df65b0',
-              name: '2000s'
-            },
-            {
-              color: '#dd1c77',
-              name: '2010s'
-            }
-          ]
-        }
-      },
-      {
-        name: 'HAART availability',
-        value: {
-          categories: [
-            {
-              color: '#fbb4ae',
-              name: '1 pre HAART period'
-            },
-            {
-              color: '#b3cde3',
-              name: '2 A Decade of HAART'
-            },
-            {
-              color: '#ccebc5',
-              name: '3 multiple medications available'
-            }
-          ]
-        }
-      }
+  const descs = [ 
   ];
 
   return descs.map((d) => {
