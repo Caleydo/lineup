@@ -62,7 +62,9 @@ export const desc = (() => {
         'minutes',
         'assists',
         'current league',
-        'current club'];
+        'current club',
+        'position',
+        'nationality'];
   return {
     columns: desc,
     layout: {
