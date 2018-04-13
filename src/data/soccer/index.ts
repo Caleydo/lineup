@@ -32,7 +32,7 @@ export interface IRow {
 }
 
 function clean(v: string) {
-  return v.replace(/[.\s;%-,()]+/mg,'');
+  return v.replace(/[.\s;%-,()]+/mg, '');
 }
 
 export const desc = (() => {
@@ -53,35 +53,37 @@ export const desc = (() => {
     d.label = d.column;
     d.column = clean(d.column);
   });
-  const defaultColumns = ['soccerplayers',
-        'age',
-        'height',
-        'foot',
-        'games',
-        'goals',
-        'minutes',
-        'assists',
-        'current league',
-        'current club',
-        'position',
-        'nationality'];
+  const defaultColumns = [
+    'soccerplayers',
+    'age',
+    'height',
+    'foot',
+    'games',
+    'goals',
+    'minutes',
+    'assists',
+    'current league',
+    'current club',
+    'position',
+    'nationality'
+  ];
   return {
     columns: desc,
     layout: {
       primary: [
-      {
-        type: 'aggregate'
-      },
-      {
-        type: 'group',
-        width: 150
-      },
-      {
-        type: 'rank'
-      },
-      {
-        type: 'selection'
-      },
+        {
+          type: 'aggregate'
+        },
+        {
+          type: 'group',
+          width: 150
+        },
+        {
+          type: 'rank'
+        },
+        {
+          type: 'selection'
+        },
         ...defaultColumns.map((d) => ({column: clean(d)}))
       ]
     }
@@ -111,8 +113,9 @@ export function loader() {
           resolve();
         });
       });
-     }
-    return Promise.all([      
+    }
+
+    return Promise.all([
       integrateMatrix(matrixColumns[0], csvAssists),
       integrateMatrix(matrixColumns[1], csvGames),
       integrateMatrix(matrixColumns[2], csvGoals),
@@ -123,29 +126,27 @@ export function loader() {
   });
 }
 
-export const defaultColumns: string[] = [
-
-];
+export const defaultColumns: string[] = [];
 
 
 function parseStratifications() {
   const data = csv.parse(csvSeasons);
 
-  const descs = [ 
+  const descs = [
     {
-        name: 'season',
-        value: {
-          categories: [
-            "12/13",
-            "13/14",
-            "14/15",
-            "15/16",
-            "16/17",
-            "17/18",
-          ]
-        }
+      name: 'season',
+      value: {
+        categories: [
+          '12/13',
+          '13/14',
+          '14/15',
+          '15/16',
+          '16/17',
+          '17/18',
+        ]
       }
-  
+    }
+
   ];
 
   return descs.map((d) => {
