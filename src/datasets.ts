@@ -8,6 +8,7 @@ import * as dataWUR from 'file-loader!./data/wur2013.txt';
 import * as descWUR from './data/data.json';
 import * as descWURSmall from './data/data_small.json';
 import * as aids from './data/aids';
+import * as soccer from './data/soccer';
 import {IStratification} from './taggle/splicer';
 
 export interface IDataSetSpec {
@@ -18,6 +19,13 @@ export interface IDataSetSpec {
   stratifications?: IStratification[];
 }
 const data: IDataSetSpec[] = [
+  {
+    id: 'soccer',
+    name: 'Soccer',
+    desc: soccer.desc,
+    url: soccer.loader,
+    stratifications: soccer.stratifications
+  },
   {
     id: 'aids',
     name: 'AIDS',
