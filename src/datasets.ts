@@ -20,6 +20,13 @@ export interface IDataSetSpec {
 }
 const data: IDataSetSpec[] = [
   {
+    id: 'soccer',
+    name: 'Soccer',
+    desc: soccer.desc,
+    url: soccer.loader,
+    stratifications: soccer.stratifications
+  },
+  {
     id: 'aids',
     name: 'AIDS',
     desc: aids.desc,
@@ -43,14 +50,7 @@ const data: IDataSetSpec[] = [
     name: 'SP500 2015-06-26',
     desc: descSP500,
     url: dataSP500
-  },
-  {
-    id: 'soccer',
-    name: 'Soccer',
-    desc: soccer.desc,
-    url: soccer.loader,
-    stratifications: soccer.stratifications
-   }
+  }
 ];
 
 export default data;
