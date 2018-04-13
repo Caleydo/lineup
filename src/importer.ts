@@ -17,7 +17,10 @@ interface IImportedData {
   name: string;
 
   desc: {
-    columns: IColumnDesc[]
+    columns: IColumnDesc[],
+    layout?: {
+      primary: any[]
+    }
   };
 
   data: any;
@@ -98,6 +101,32 @@ function convertLoaded(r, guessed: EGuessedState = EGuessedState.CHECKED):IImpor
   return {name, desc, data: r.data};
 }
 
+function addDefaultColumns(data: IImportedData): IImportedData {
+  const defaultColumns = [
+    {
+      type: 'aggregate',
+    },
+    {
+      type: 'group',
+      width: 150
+    },
+    {
+      type: 'rank'
+    },
+    {
+      type: 'selection'
+    }
+  ];
+
+  if(!data.desc.layout) {
+    data.desc.layout = {
+      primary: [...defaultColumns, ...data.desc.columns]
+    };
+  }
+
+  return data;
+}
+
 function loadJSON(file: File, name: string):Promise<IImportedData> {
   return new Promise((resolve) => {
     const f = new FileReader();
@@ -137,6 +166,9 @@ function createImporter(parent: Element) {
         })
         .then((csvTable) => {
           return convertLoaded(csvTable());
+        })
+        .then((data) => {
+          return addDefaultColumns(data);
         });
     }
   };
@@ -202,6 +234,9 @@ export function initImporter() {
         .then((csvTable) => {
           return convertLoaded(csvTable(), EGuessedState.GUESSED);
         })
+        .then((data) => {
+          return addDefaultColumns(data);
+        })
         .then(({name, desc, data}) => {
           initTaggle(name, desc, data, [], taggle);
         });
@@ -229,3 +264,4 @@ export function initImporter() {
     }
   });
 }
+
