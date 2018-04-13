@@ -66,6 +66,13 @@ function deriveColumns(columns: any[], guessed: EGuessedState = EGuessedState.CH
         r.type = 'number';
         r.domain = val.range;
         break;
+      case 'matrix':
+        r.type = 'numbers';
+        r.domain = val.range;
+        r.colorRange = val.colorRange;
+        r.dataLength = val.dataLength;
+        r.labels = val.labels;
+        break;
       default:
         r.type = 'string';
         break;
