@@ -372,7 +372,7 @@
 "Romelu Lukaku",24,"Manchester United","Premier League","left",191.0,"Belgium  DR Congo","CF"	
 "Marcus Rashford",20,"Manchester United","Premier League","right",185.0,"England","CF"	
 "Zlatan Ibrahimovic",36,"Manchester United","Premier League","both",195.0,"Sweden  Bosnia-Herzegovina","CF"	
-"Heung-Min Son",25,"Tottenham Hotspur","Premier League","both",184.0,"Korea"," South",W
+"Heung-Min Son",25,"Tottenham Hotspur","Premier League","both",184.0,"Korea South","W"
 "Lucas",25,"Tottenham Hotspur","Premier League","right",174.0,"Brazil","W"	
 "Érik Lamela",26,"Tottenham Hotspur","Premier League","left",184.0,"Argentina  Spain","W"	
 "Harry Kane",24,"Tottenham Hotspur","Premier League","right",188.0,"England","CF"	
@@ -417,7 +417,7 @@
 "Bakary Sako",29,"Crystal Palace","Premier League","left",183.0,"Mali  France","W"	
 "Wilfried Zaha",25,"Crystal Palace","Premier League","right",180.0,"Cote d'Ivoire  England","W"	
 "Andros Townsend",26,"Crystal Palace","Premier League","left",177.0,"England","W"	
-"Chung-Yong Lee",29,"Crystal Palace","Premier League","right",180.0,"Korea"," South",W
+"Chung-Yong Lee",29,"Crystal Palace","Premier League","right",180.0,"Korea South","W"
 "Christian Benteke",27,"Crystal Palace","Premier League","right",190.0,"Belgium  DR Congo","CF"	
 "Connor Wickham",24,"Crystal Palace","Premier League","right",189.0,"England  Northern Ireland","CF"	
 "Alexander Sörloth",22,"Crystal Palace","Premier League","left",194.0,"Norway","CF"	
@@ -646,7 +646,7 @@
 "Vlad Morar",24,"Panetolikos Agrinio","Super League","right",183.0,"Romania","CF"	
 "Georgios Vakrakos",20,"Panetolikos Agrinio","Super League","",0,"Greece","CF"	
 "Eugenio Isnaldo",24,"Asteras Tripolis","Super League","left",180.0,"Argentina","W"	
-"Gyeol-Hee Jang",19,"Asteras Tripolis","Super League","left",175.0,"Korea"," South",W
+"Gyeol-Hee Jang",19,"Asteras Tripolis","Super League","left",175.0,"Korea South","W"
 "Nikolaos Kaltsas",27,"Asteras Tripolis","Super League","right",171.0,"Greece","W"	
 "Giannis Kotsiras",25,"Asteras Tripolis","Super League","right",183.0,"Greece","W"	
 "Nabil Jaadi",21,"Asteras Tripolis","Super League","right",178.0,"Morocco  Belgium","W"	
@@ -789,7 +789,7 @@
 "Jérémie Porsan-Clemente",20,"HSC Montpellier","Ligue 1","right",179.0,"France  Martinique","CF"	
 "Naïm Sliti",25,"FCO Dijon","Ligue 1","right",173.0,"Tunisia  France","W"	
 "Wesley Saïd",22,"FCO Dijon","Ligue 1","right",171.0,"France  Mauritius","W"	
-"Chang-hun Kwon",23,"FCO Dijon","Ligue 1","left",174.0,"Korea"," South",W
+"Chang-hun Kwon",23,"FCO Dijon","Ligue 1","left",174.0,"Korea South","W"
 "Benjamin Jeannot",26,"FCO Dijon","Ligue 1","right",183.0,"France","CF"	
 "Julio Tavarès",29,"FCO Dijon","Ligue 1","right",187.0,"Cape Verde  France","CF"	
 "Marcus Coco",21,"EA Guingamp","Ligue 1","right",184.0,"France  Guadeloupe","W"	
@@ -822,7 +822,7 @@
 "Nuno Da Costa",27,"RC Strasbourg Alsace","Ligue 1","right",182.0,"Cape Verde  France","CF"	
 "Stéphane Bahoken",25,"RC Strasbourg Alsace","Ligue 1","right",185.0,"France  Cameroon","CF"	
 "Jérémy Blayac",34,"RC Strasbourg Alsace","Ligue 1","right",187.0,"France","CF"	
-"Hyun-Jun Suk",26,"ES Troyes AC","Ligue 1","right",191.0,"Korea"," South",CF
+"Hyun-Jun Suk",26,"ES Troyes AC","Ligue 1","right",191.0,"Korea South","CF"
 "Adama Niane",24,"ES Troyes AC","Ligue 1","right",183.0,"Mali","CF"	
 "Jonathan Tinhan",28,"ES Troyes AC","Ligue 1","right",177.0,"Benin  France","CF"	
 "Raphaël Cacérès",30,"ES Troyes AC","Ligue 1","right",187.0,"France","CF"	
@@ -915,7 +915,7 @@
 "Rodrigo Palacio",36,"Bologna FC 1909","Serie A","right",176.0,"Argentina  Spain","CF"	
 "Leonardo Pavoletti",29,"Cagliari Calcio","Serie A","right",188.0,"Italy","CF"	
 "Marco Sau",30,"Cagliari Calcio","Serie A","right",169.0,"Italy","CF"	
-"Kwang-Song Han",19,"Cagliari Calcio","Serie A","both",178.0,"Korea"," North",CF
+"Kwang-Song Han",19,"Cagliari Calcio","Serie A","both",178.0,"Korea North","CF"
 "Niccolò Giannetti",26,"Cagliari Calcio","Serie A","right",181.0,"Italy","CF"	
 "Damir Ceter",20,"Cagliari Calcio","Serie A","right",188.0,"Colombia","CF"	
 "Emanuele Giaccherini",32,"Chievo Verona","Serie A","right",167.0,"Italy","W"	
@@ -928,7 +928,7 @@
 "Mirco Antenucci",33,"SPAL 2013","Serie A","right",180.0,"Italy","CF"	
 "Marco Borriello",35,"SPAL 2013","Serie A","left",186.0,"Italy","CF"	
 "Sergio Floccari",36,"SPAL 2013","Serie A","right",180.0,"Italy  San Marino","CF"	
-"Seung-Woo Lee",20,"Hellas Verona","Serie A","right",173.0,"Korea"," South",W
+"Seung-Woo Lee",20,"Hellas Verona","Serie A","right",173.0,"Korea South","W"
 "Rolando Aarons",22,"Hellas Verona","Serie A","left",177.0,"England  Jamaica","W"	
 "Daniele Verde",21,"Hellas Verona","Serie A","left",168.0,"Italy","W"	
 "Alessio Cerci",30,"Hellas Verona","Serie A","left",180.0,"Italy","W"	
