@@ -1,4 +1,4 @@
-"soccerplayers","age","current club","current league","foot","height","nationality","position",
+﻿"soccerplayers","age","current club","current league","foot","height","nationality","position",
 "Dmitri Poloz",26,"Zenit St. Petersburg","Premier Liga","right",183.0,"Russia","W"	
 "Emiliano Rigoni",25,"Zenit St. Petersburg","Premier Liga","both",180.0,"Argentina  Italy","W"	
 "Sebastián Driussi",22,"Zenit St. Petersburg","Premier Liga","both",179.0,"Argentina  Italy","CF"	
@@ -177,7 +177,7 @@
 "Samu García",27,"Málaga CF","LaLiga","right",177.0,"Spain","W"	
 "Diego Rolán",24,"Málaga CF","LaLiga","right",177.0,"Uruguay","CF"	
 "Borja Bastón",25,"Málaga CF","LaLiga","right",186.0,"Spain","CF"	
-"Brown Ideye",29,"MĂĄlaga CF","LaLiga","right",181.0,"Nigeria","CF"	
+"Brown Ideye",29,"Málaga CF","LaLiga","right",181.0,"Nigeria","CF"	
 "Adalberto Peñaranda",20,"Málaga CF","LaLiga","right",185.0,"Venezuela","CF"	
 "Youssef En-Nesyri",20,"Málaga CF","LaLiga","both",189.0,"Morocco","CF"	
 "Cristhian Stuani",31,"Girona FC","LaLiga","right",184.0,"Uruguay  Italy","CF"	
@@ -567,7 +567,7 @@
 "Sokol Cikalleshi",27,"Osmanlispor FK","Süper Lig","right",187.0,"Albania","CF"	
 "Raul Rusescu",29,"Osmanlispor FK","Süper Lig","right",181.0,"Romania","CF"	
 "Mehmet Batdal",32,"Osmanlispor FK","Süper Lig","both",196.0,"Turkey","CF"	
-"Ali ĂzgĂźn",28,"Osmanlispor FK","Süper Lig","right",186.0,"Germany","CF"	
+"Ali Özgün",28,"Osmanlispor FK","Süper Lig","right",186.0,"Germany","CF"	
 "Maicón",28,"Antalyaspor","Süper Lig","right",182.0,"Brazil  Portugal","W"	
 "Milan Jevtovic",24,"Antalyaspor","Süper Lig","right",184.0,"Serbia","W"	
 "Souleymane Doukara",26,"Antalyaspor","Süper Lig","right",186.0,"Senegal  France","CF"	
@@ -1089,7 +1089,7 @@
 "Héldon",29,"Vitória Guimarães SC","Liga NOS","right",174.0,"Cape Verde  South Africa","W"	
 "Fábio Sturgeon",24,"Vitória Guimarães SC","Liga NOS","both",183.0,"Portugal  England","W"	
 "Hélder Ferreira",20,"Vitória Guimarães SC","Liga NOS","left",179.0,"Portugal","W"	
-"Welthon",25,"VitĂłria GuimarĂŁes SC","Liga NOS","left",180.0,"Brazil","CF"	
+"Welthon",25,"Vitória Guimarães SC","Liga NOS","left",180.0,"Brazil","CF"	
 "Junior Tallo",25,"Vitória Guimarães SC","Liga NOS","right",185.0,"Cote d'Ivoire","CF"	
 "Sebastián Rincón",24,"Vitória Guimarães SC","Liga NOS","",185.0,"Colombia","CF"	
 "Óscar Estupiñán",21,"Vitória Guimarães SC","Liga NOS","left",182.0,"Colombia","CF"	
