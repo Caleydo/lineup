@@ -15,7 +15,7 @@
 			"column": "current club",
 			"label": "Current club",
 			"color": "#DDDDDD",
-			"type": "categorical"
+			"type": "string"
 		},
 		{
 			"column": "current league",
@@ -68,7 +68,7 @@
 			"column": "nationality",
 			"label": "Nationality",
 			"color": "#DDDDDD",
-			"type": "categorical"
+			"type": "string"                       
 		},
 		{
 			"column": "position",
