@@ -46,27 +46,13 @@ export const desc = (() => {
       column: m.name,
       dataLength: m.size[1],
       colorRange: ['white', 'black'],
-      labels: seasons
+      labels: seasons   
     });
   });
   desc.forEach((d) => {
     d.label = d.column;
     d.column = clean(d.column);
   });
-  const defaultColumns = [
-    'soccerplayers',
-    'age',
-    'height',
-    'foot',
-    'games',
-    'goals',
-    'minutes',
-    'assists',
-    'current league',
-    'current club',
-    'position',
-    'nationality'
-  ];
   return {
     columns: desc,
     layout: {
@@ -84,7 +70,37 @@ export const desc = (() => {
         {
           type: 'selection'
         },
-        ...defaultColumns.map((d) => ({column: clean(d)}))
+        {
+            column: 'soccerplayers',
+            width: 150
+        },
+        {
+            column: 'currentleague'
+        },
+        {
+            column: 'currentclub',
+            width: 100
+        },
+        {
+            column: 'position'
+        },
+        {
+            column: 'foot'
+        },
+        {
+            column: 'age'
+        },
+        {
+            column: 'height'
+        },
+        {
+            column: 'goals',
+            width: 300
+        },
+        {
+            column: 'games',
+            width: 300
+        }
       ]
     }
   };
