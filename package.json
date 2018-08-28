@@ -59,7 +59,7 @@
     "lineupjs": "github:Caleydo/lineupjs#v1.1.2",
     "phovea_ui": "2.0.0",
     "phovea_core": "2.0.0",
-    "phovea_importer": "2.0.0"
+    "phovea_importer": "2.0.1"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.41",
